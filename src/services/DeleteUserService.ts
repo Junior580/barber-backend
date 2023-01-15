@@ -1,20 +1,18 @@
 import AppError from '../errors/AppError'
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
 
-export class GetUserService {
+export class DeleteUserService {
   usersRepository: IUsersRepository
-
   constructor(usersRepository: IUsersRepository) {
     this.usersRepository = usersRepository
   }
+  public async execute(id: string) {
+    const user = await this.usersRepository.findOneById(id)
 
-  public async execute() {
-    const user = await this.usersRepository.findAll()
-
-    if (user.length === 0) {
-      throw new AppError('Nothing user.', 401)
+    if (!user) {
+      throw new AppError('User does not exists.', 401)
     }
 
-    return user
+    await this.usersRepository.delete(id)
   }
 }

@@ -11,23 +11,25 @@ interface IRequest {
 }
 
 export class CreateUserSerice {
-  createUsersRepository: IUsersRepository
+  usersRepository: IUsersRepository
 
-  constructor(createUsersRepository: IUsersRepository) {
-    this.createUsersRepository = createUsersRepository
+  constructor(usersRepository: IUsersRepository) {
+    this.usersRepository = usersRepository
   }
 
   public async execute({ name, email, password }: IRequest): Promise<User> {
-    const userExists = await this.createUsersRepository.findOneByEmail(email)
+    const userExists = await this.usersRepository.findOneByEmail(email)
 
     if (userExists) {
+      console.log(userExists)
+
       throw new AppError('User already exists', 400)
     }
 
     const hashedPass = await hash(password, 8)
 
-    const user = this.createUsersRepository.create({
-      id: uuid(),
+    const user = this.usersRepository.create({
+      id: uuid().toUpperCase(),
       email,
       name,
       password: hashedPass,
