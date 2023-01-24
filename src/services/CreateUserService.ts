@@ -10,7 +10,7 @@ interface IRequest {
   password: string
 }
 
-export class CreateUserSerice {
+export class CreateUserService {
   usersRepository: IUsersRepository
 
   constructor(usersRepository: IUsersRepository) {
@@ -21,8 +21,6 @@ export class CreateUserSerice {
     const userExists = await this.usersRepository.findOneByEmail(email)
 
     if (userExists) {
-      console.log(userExists)
-
       throw new AppError('User already exists', 400)
     }
 

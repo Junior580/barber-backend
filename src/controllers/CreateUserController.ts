@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { CreateUserSerice } from '../services/CreateUserService'
+import { CreateUserService } from '../services/CreateUserService'
 import { UserRepository } from '../repositories/UserRepository'
 
 export class CreateUserController {
@@ -8,7 +8,7 @@ export class CreateUserController {
 
     const userRepo = new UserRepository()
 
-    const createUser = new CreateUserSerice(userRepo)
+    const createUser = new CreateUserService(userRepo)
 
     const user = await createUser.execute({ name, email, password })
 
