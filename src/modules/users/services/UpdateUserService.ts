@@ -1,10 +1,8 @@
-import { User } from '../app/entities/Users'
-import AppError from '../errors/AppError'
+import { User } from '../infra/typeorm/entities/Users'
+import AppError from '../../../shared/errors/AppError'
 import { hash } from 'bcryptjs'
-import {
-  IUsersRepository,
-  ICreateUser,
-} from '../repositories/interfaces/IUserRepository'
+import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
+import { ICreateUserDTO } from '../dtos/ICreateUserDTO'
 
 export class UpdateUserService {
   usersRepository: IUsersRepository
@@ -17,7 +15,7 @@ export class UpdateUserService {
     name,
     email,
     password,
-  }: ICreateUser): Promise<User> {
+  }: ICreateUserDTO): Promise<User> {
     const user = await this.usersRepository.findOneById(id)
 
     if (!user) {

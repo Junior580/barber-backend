@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { CreateUserService } from '../services/CreateUserService'
-import { UserRepository } from '../repositories/UserRepository'
+import { CreateUserService } from '../../../services/CreateUserService'
+import { UserRepository } from '../../../infra/typeorm/repositories/UserRepository'
 
 export class CreateUserController {
   public async handle(req: Request, res: Response) {

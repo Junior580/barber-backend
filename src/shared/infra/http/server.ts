@@ -2,9 +2,9 @@ import 'express-async-errors'
 import 'reflect-metadata'
 import express from 'express'
 
-import { AppDataSource } from './database/data-source'
-import { indexRoutes } from './routes/index.routes'
-import { handleError } from './middlewares/HandleError'
+import { AppDataSource } from '../typeorm/data-source'
+import { indexRoutes } from '../http/routes/index.routes'
+import { handleError } from '../http/middlewares/HandleError'
 
 AppDataSource.initialize()
   .then(() => {

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import AppError from '../errors/AppError'
+import AppError from '../../../errors/AppError'
 
 export function handleError(
   error: Error,
@@ -12,6 +12,7 @@ export function handleError(
       .status(error.statusCode)
       .send({ status: 'error', message: error.message })
   }
+  console.log(error)
   return res
     .status(500)
     .send({ status: 'error', message: 'Internal server error', error })

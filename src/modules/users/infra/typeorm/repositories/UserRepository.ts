@@ -1,6 +1,7 @@
-import { AppDataSource } from '../database/data-source'
-import { User } from '../app/entities/Users'
-import { IUsersRepository, ICreateUser } from './interfaces/IUserRepository'
+import { AppDataSource } from '../../../../../shared/infra/typeorm/data-source'
+import { User } from '../entities/Users'
+import { IUsersRepository } from '../../../repositories/interfaces/IUserRepository'
+import { ICreateUserDTO } from '../../../dtos/ICreateUserDTO'
 
 export const userRepository = AppDataSource.getRepository(User)
 
@@ -16,7 +17,7 @@ export class UserRepository implements IUsersRepository {
     name,
     email,
     password,
-  }: ICreateUser): Promise<User> {
+  }: ICreateUserDTO): Promise<User> {
     const user = userRepository.create({ id, name, email, password })
 
     await userRepository.save(user)

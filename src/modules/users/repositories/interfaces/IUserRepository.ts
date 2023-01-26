@@ -1,15 +1,9 @@
-import { User } from '../../app/entities/Users'
-
-export interface ICreateUser {
-  id: string
-  name: string
-  email: string
-  password: string
-}
+import { User } from '@modules/users/infra/typeorm/entities/Users'
+import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO'
 
 export interface IUsersRepository {
   findOneByEmail(email: string): Promise<User | null>
-  create({ id, name, email, password }: ICreateUser): Promise<User>
+  create({ id, name, email, password }: ICreateUserDTO): Promise<User>
   findAll(): Promise<User[]>
   findOneById(id: string): Promise<User | null>
   save(user: User): Promise<User>

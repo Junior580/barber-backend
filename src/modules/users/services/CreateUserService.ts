@@ -1,8 +1,8 @@
 import { v4 as uuid } from 'uuid'
-import { User } from '../app/entities/Users'
+import { User } from '../infra/typeorm/entities/Users'
 import { hash } from 'bcryptjs'
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
-import AppError from '../errors/AppError'
+import AppError from '../../../shared/errors/AppError'
 
 interface IRequest {
   name: string

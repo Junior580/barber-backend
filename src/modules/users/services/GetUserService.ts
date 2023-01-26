@@ -1,4 +1,4 @@
-import AppError from '../errors/AppError'
+import AppError from '../../../shared/errors/AppError'
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
 
 export class GetUserService {
