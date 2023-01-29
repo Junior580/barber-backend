@@ -6,14 +6,15 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only ./src/shared/infra/http/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
-    "migration:generate": "typeorm-ts-node-commonjs -d ./src/shared/infra/typeorm/data-source.ts migration:generate ./src/database/migrations/default",
-    "migration:run": "typeorm-ts-node-commonjs -d ./src/shared/infra/typeorm//data-source.ts migration:run",
-    "migration:revert": "typeorm-ts-node-commonjs -d ./src/shared/infra/typeorm//data-source.ts migration:revert",
+    "migration:generate": "typeorm-ts-node-commonjs -d ./src/shared/infra/typeorm/data-source.ts migration:generate ./src/shared/infra/typeorm/migrations/default",
+    "migration:run": "typeorm-ts-node-commonjs -d ./src/shared/infra/typeorm/data-source.ts migration:run",
+    "migration:revert": "typeorm-ts-node-commonjs -d ./src/shared/infra/typeorm/data-source.ts migration:revert",
     "husky:prepare": "husky install",
     "test": "jest"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "class-transformer": "^0.5.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
