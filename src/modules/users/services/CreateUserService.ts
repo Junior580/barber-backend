@@ -11,11 +11,7 @@ interface IRequest {
 }
 
 export class CreateUserService {
-  usersRepository: IUsersRepository
-
-  constructor(usersRepository: IUsersRepository) {
-    this.usersRepository = usersRepository
-  }
+  constructor(private readonly usersRepository: IUsersRepository) {}
 
   public async execute({ name, email, password }: IRequest): Promise<User> {
     const userExists = await this.usersRepository.findOneByEmail(email)

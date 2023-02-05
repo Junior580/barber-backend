@@ -1,6 +1,6 @@
 import {
   Entity,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   ManyToOne,
@@ -11,7 +11,7 @@ import { User } from '../../../../users/infra/typeorm/entities/Users'
 
 @Entity('appointments')
 export class Appointment {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string
 
   @Column()

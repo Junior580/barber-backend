@@ -25,3 +25,58 @@
 //     expect(user.name).toBe('user1')
 //   })
 // })
+
+import { DataSource, Entity, getRepository } from 'typeorm'
+import { PrimaryGeneratedColumn, Column } from 'typeorm'
+import { userRepository } from '../repositories/in-memory/UserRepositoryInMemory'
+
+@Entity()
+export class MyEntity {
+  @PrimaryGeneratedColumn()
+  id?: number
+
+  @Column()
+  name?: string
+}
+
+beforeEach(() => {
+  const AppDataSource = new DataSource({
+    type: 'sqlite',
+    database: ':memory:',
+    dropSchema: true,
+    entities: [MyEntity],
+    synchronize: true,
+    logging: false,
+  })
+  const userRepository = AppDataSource.getRepository(MyEntity)
+
+  return AppDataSource
+})
+
+// afterEach(() => {
+//   const conn = getConnection()
+//   return conn.close()
+// })
+
+test('store Joe and fetch it', async () => {
+  await userRepository.create('joe')
+
+  const joe = await getRepository(MyEntity).find({
+    where: {
+      id: 1,
+    },
+  })
+  expect(joe[0].name).toBe('Joe')
+})
+
+test('store Another and fetch it', async () => {
+  await getRepository(MyEntity).insert({
+    name: 'Another',
+  })
+  const joe = await getRepository(MyEntity).find({
+    where: {
+      id: 1,
+    },
+  })
+  expect(joe[0].name).toBe('Another')
+})
