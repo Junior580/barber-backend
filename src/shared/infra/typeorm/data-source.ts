@@ -15,12 +15,3 @@ export const AppDataSource = new DataSource({
   ],
   migrations: [__dirname + '/migrations/*.{ts,js}'],
 })
-
-export const TestAppDataSource = new DataSource({
-  type: 'postgres',
-  database: 'mydb.sql',
-  entities: [
-    __dirname + '../../../../modules/**/infra/typeorm/entities/*.{ts,js}',
-  ],
-  migrations: [__dirname + '/migrations/*.{ts,js}'],
-})

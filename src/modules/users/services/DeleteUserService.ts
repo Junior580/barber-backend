@@ -2,10 +2,7 @@ import AppError from '../../../shared/errors/AppError'
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
 
 export class DeleteUserService {
-  usersRepository: IUsersRepository
-  constructor(usersRepository: IUsersRepository) {
-    this.usersRepository = usersRepository
-  }
+  constructor(private readonly usersRepository: IUsersRepository) {}
   public async execute(id: string) {
     const user = await this.usersRepository.findOneById(id)
 

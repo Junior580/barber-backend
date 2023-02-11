@@ -2,11 +2,7 @@ import AppError from '../../../shared/errors/AppError'
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
 
 export class GetUserService {
-  usersRepository: IUsersRepository
-
-  constructor(usersRepository: IUsersRepository) {
-    this.usersRepository = usersRepository
-  }
+  constructor(private readonly usersRepository: IUsersRepository) {}
 
   public async execute() {
     const user = await this.usersRepository.findAll()

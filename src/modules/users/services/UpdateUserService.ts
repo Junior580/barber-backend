@@ -5,11 +5,7 @@ import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
 import { ICreateUserDTO } from '../dtos/ICreateUserDTO'
 
 export class UpdateUserService {
-  usersRepository: IUsersRepository
-
-  constructor(usersRepository: IUsersRepository) {
-    this.usersRepository = usersRepository
-  }
+  constructor(private readonly usersRepository: IUsersRepository) {}
   public async execute({
     id,
     name,

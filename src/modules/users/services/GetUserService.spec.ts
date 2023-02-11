@@ -1,26 +1,31 @@
 import { UserRepositoryInMemory } from '../repositories/in-memory/UserRepositoryInMemory'
+import { GetUserService } from '../services/GetUserService'
 import { CreateUserService } from '../services/CreateUserService'
 import AppError from '../../../shared/errors/AppError'
 
 let fakeUsersRepository: UserRepositoryInMemory
+let getUser: GetUserService
 let createUser: CreateUserService
 
-describe('Create User', () => {
-  beforeEach(() => {
+describe('Get users', () => {
+  beforeEach(async () => {
     fakeUsersRepository = new UserRepositoryInMemory()
+    getUser = new GetUserService(fakeUsersRepository)
     createUser = new CreateUserService(fakeUsersRepository)
-  })
 
-  it('should be able to create a new user', async () => {
     const user = await createUser.execute({
       name: 'user1',
       email: 'user1@email.com',
       password: '123456',
     })
-    expect(user).toHaveProperty('id')
   })
 
-  it('should be not able to create a new user with same email from another one', async () => {
+  it('should be able to get users', async () => {
+    const user = await getUser.execute()
+
+    expect(user[0]).toHaveProperty('id')
+  })
+  it('should be not able to return user if the list is empty', async () => {
     const user = await createUser.execute({
       name: 'user1',
       email: 'user1@email.com',

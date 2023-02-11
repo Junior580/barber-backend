@@ -1,47 +1,48 @@
-import { TestAppDataSource } from '../../../../shared/infra/typeorm/data-source'
 import { User } from '../../../users/infra/typeorm/entities/Users'
 import { IUsersRepository } from '../../repositories/interfaces/IUserRepository'
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO'
+import { v4 as uuid } from 'uuid'
 
-export const userRepository = TestAppDataSource.getRepository(User)
+export class UserRepositoryInMemory implements IUsersRepository {
+  private users: User[] = []
 
-export class UserRepository implements IUsersRepository {
-  public async findOneByEmail(email: string): Promise<User | null> {
-    const user = await userRepository.findOneBy({ email })
+  public async findOneByEmail(email: string): Promise<User | undefined> {
+    const user = this.users.find(user => user.email === email)
 
     return user
   }
 
   public async create({
-    id,
     name,
     email,
     password,
   }: ICreateUserDTO): Promise<User> {
-    const user = userRepository.create({ id, name, email, password })
+    const user = new User()
 
-    await userRepository.save(user)
+    Object.assign(user, { id: uuid(), name, email, password })
+
+    this.users.push(user)
 
     return user
   }
 
   public async findAll(): Promise<User[]> {
-    const user = await userRepository.find()
-
-    return user
+    return this.users
   }
-  public async findOneById(id: string): Promise<User | null> {
-    const user = await userRepository.findOneBy({ id })
+
+  public async findOneById(id: string): Promise<User | undefined> {
+    const user = this.users.find(user => user.id === id)
 
     return user
   }
 
   public async save(user: User): Promise<User> {
-    const userUpdated = await userRepository.save(user)
-    return userUpdated
+    this.users.push(user)
+
+    return user
   }
 
   public async delete(id: string): Promise<void> {
-    await userRepository.delete(id)
+    this.users.pop()
   }
 }
