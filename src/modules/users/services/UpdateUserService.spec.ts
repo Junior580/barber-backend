@@ -35,6 +35,23 @@ describe('update users', () => {
     expect(user).toHaveProperty('password')
   })
 
+  it('should be able to update an existing user, with on param', async () => {
+    await createUser.execute({
+      name: 'user1',
+      email: 'user1@email.com',
+      password: '123456',
+    })
+
+    const userID = fakeUsersRepository.users[0].id
+
+    const user = await updateUser.execute({
+      id: userID,
+      email: 'user2@email.com',
+    })
+
+    expect(user.email).toBe('user2@email.com')
+  })
+
   it('should not able to update with the same email', async () => {
     await createUser.execute({
       name: 'user1',
