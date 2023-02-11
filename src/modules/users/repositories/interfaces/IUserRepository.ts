@@ -1,5 +1,5 @@
-import { User } from '@modules/users/infra/typeorm/entities/Users'
-import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO'
+import { User } from '../../infra/typeorm/entities/Users'
+import { ICreateUserDTO } from '../../dtos/ICreateUserDTO'
 
 export interface IUsersRepository {
   findOneByEmail(email: string): Promise<User | null>

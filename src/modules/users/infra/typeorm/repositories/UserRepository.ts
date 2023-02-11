@@ -35,7 +35,7 @@ export class UserRepository implements IUsersRepository {
   public async findOneById(id: string): Promise<User | null> {
     const user = await userRepository.findOneBy({ id })
 
-    return user
+    return user || null
   }
 
   public async save(user: User): Promise<User> {

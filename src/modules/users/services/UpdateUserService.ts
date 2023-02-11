@@ -6,6 +6,7 @@ import { ICreateUserDTO } from '../dtos/ICreateUserDTO'
 
 export class UpdateUserService {
   constructor(private readonly usersRepository: IUsersRepository) {}
+
   public async execute({
     id,
     name,

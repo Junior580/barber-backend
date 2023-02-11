@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for modules/users/repositories/in-memory/UserRepositoryInMemory.ts</title>
+    <title>Code coverage report for modules/users/repositories/in-memory/InMemoryUserRepository.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">modules/users/repositories/in-memory</a> UserRepositoryInMemory.ts</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">modules/users/repositories/in-memory</a> InMemoryUserRepository.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -116,6 +116,16 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -126,51 +136,41 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { User } from '../../../users/infra/typeorm/entities/Users'
-import { IUsersRepository } from '../../repositories/interfaces/IUserRepository'
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { User } from '../../infra/typeorm/entities/Users'
+import { IUsersRepository } from '../interfaces/IUserRepository'
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO'
 import { v4 as uuid } from 'uuid'
 &nbsp;
-export class UserRepositoryInMemory implements IUsersRepository {
+export class InMemoryUserRepository implements IUsersRepository {
   private users: User[] = []
 &nbsp;
-  public async findOneByEmail(email: string): Promise&lt;User | undefined&gt; {
+  public async findOneByEmail(email: string): Promise&lt;User | null&gt; {
     const user = this.users.find(user =&gt; user.email === email)
 &nbsp;
-    return user
+    return user || null
   }
 &nbsp;
   public async create({
@@ -191,10 +191,10 @@ export class UserRepositoryInMemory implements IUsersRepository {
     return this.users
   }
 &nbsp;
-  public async <span class="fstat-no" title="function not covered" >findOneById(id: string): Promise&lt;User | undefined&gt; {</span>
+  public async <span class="fstat-no" title="function not covered" >findOneById(id: string): Promise&lt;User | null&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    const user = this.users.find(user =&gt; user.id === id)</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    return user</span>
+<span class="cstat-no" title="statement not covered" >    return user || null</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
   public async <span class="fstat-no" title="function not covered" >save(user: User): Promise&lt;User&gt; {</span>
@@ -214,7 +214,7 @@ export class UserRepositoryInMemory implements IUsersRepository {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-11T12:04:46.607Z
+                at 2023-02-11T13:03:34.750Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

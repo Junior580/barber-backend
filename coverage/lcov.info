@@ -38,8 +38,8 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/modules/users/repositories/in-memory/UserRepositoryInMemory.ts
-FN:6,UserRepositoryInMemory
+SF:src/modules/users/repositories/in-memory/InMemoryUserRepository.ts
+FN:6,InMemoryUserRepository
 FN:9,findOneByEmail
 FN:15,create
 FN:29,findAll
@@ -48,7 +48,7 @@ FN:39,save
 FN:45,delete
 FNF:7
 FNH:4
-FNDA:4,UserRepositoryInMemory
+FNDA:4,InMemoryUserRepository
 FNDA:4,findOneByEmail
 FNDA:3,create
 FNDA:2,findAll
@@ -107,11 +107,12 @@ LF:48
 LH:38
 BRDA:6,0,0,4
 BRDA:9,1,0,4
-BRDA:10,2,0,1
-BRDA:15,3,0,3
-BRDA:29,4,0,2
-BRF:5
-BRH:5
+BRDA:12,2,0,3
+BRDA:10,3,0,1
+BRDA:15,4,0,3
+BRDA:29,5,0,2
+BRF:6
+BRH:6
 end_of_record
 TN:
 SF:src/modules/users/services/CreateUserService.ts

@@ -1,15 +1,15 @@
-import { User } from '../../../users/infra/typeorm/entities/Users'
-import { IUsersRepository } from '../../repositories/interfaces/IUserRepository'
+import { User } from '../../infra/typeorm/entities/Users'
+import { IUsersRepository } from '../interfaces/IUserRepository'
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO'
 import { v4 as uuid } from 'uuid'
 
-export class UserRepositoryInMemory implements IUsersRepository {
+export class InMemoryUserRepository implements IUsersRepository {
   private users: User[] = []
 
-  public async findOneByEmail(email: string): Promise<User | undefined> {
+  public async findOneByEmail(email: string): Promise<User | null> {
     const user = this.users.find(user => user.email === email)
 
-    return user
+    return user || null
   }
 
   public async create({
@@ -30,10 +30,10 @@ export class UserRepositoryInMemory implements IUsersRepository {
     return this.users
   }
 
-  public async findOneById(id: string): Promise<User | undefined> {
+  public async findOneById(id: string): Promise<User | null> {
     const user = this.users.find(user => user.id === id)
 
-    return user
+    return user || null
   }
 
   public async save(user: User): Promise<User> {

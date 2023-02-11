@@ -1,13 +1,13 @@
-import { UserRepositoryInMemory } from '../repositories/in-memory/UserRepositoryInMemory'
+import { InMemoryUserRepository } from '../repositories/in-memory/InMemoryUserRepository'
 import { CreateUserService } from '../services/CreateUserService'
 import AppError from '../../../shared/errors/AppError'
 
-let fakeUsersRepository: UserRepositoryInMemory
+let fakeUsersRepository: InMemoryUserRepository
 let createUser: CreateUserService
 
 describe('Create User', () => {
   beforeEach(() => {
-    fakeUsersRepository = new UserRepositoryInMemory()
+    fakeUsersRepository = new InMemoryUserRepository()
     createUser = new CreateUserService(fakeUsersRepository)
   })
 
@@ -21,13 +21,11 @@ describe('Create User', () => {
   })
 
   it('should be not able to create a new user with same email from another one', async () => {
-    const user = await createUser.execute({
+    await createUser.execute({
       name: 'user1',
       email: 'user1@email.com',
       password: '123456',
     })
-
-    expect(user).toHaveProperty('id')
 
     await expect(
       createUser.execute({
