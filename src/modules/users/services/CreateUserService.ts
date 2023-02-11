@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid'
 import { User } from '../infra/typeorm/entities/Users'
 import { hash } from 'bcryptjs'
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
@@ -23,7 +22,6 @@ export class CreateUserService {
     const hashedPass = await hash(password, 8)
 
     const user = this.usersRepository.create({
-      id: uuid().toUpperCase(),
       email,
       name,
       password: hashedPass,
