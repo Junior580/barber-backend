@@ -4,22 +4,22 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
+  ManyToOne,
 } from 'typeorm'
 import { Exclude } from 'class-transformer'
 import { v4 as uuid } from 'uuid'
-import { Post } from '../../../../appointments/infra/typeorm/entities/Posts'
+import { User } from '../../../../users/infra/typeorm/entities/Users'
 
-@Entity('users')
-export class User {
+@Entity('posts')
+export class Post {
   @PrimaryColumn()
   id: string
 
   @Column()
-  name: string
+  tittle: string
 
   @Column()
-  email: string
+  message: string
 
   @Column()
   @Exclude()
@@ -31,8 +31,8 @@ export class User {
   @UpdateDateColumn()
   updated_at: Date
 
-  @OneToMany(() => Post, post => post.user)
-  post: Post[]
+  @ManyToOne(() => User, user => user.post)
+  user: User
 
   constructor() {
     if (!this.id) {
