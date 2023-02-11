@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm'
 import { v4 as uuid } from 'uuid'
 import { User } from '../../../../users/infra/typeorm/entities/Users'
@@ -26,8 +27,11 @@ export class Post {
   @UpdateDateColumn()
   updated_at: Date
 
-  @ManyToOne(() => User, user => user.post)
-  user: User
+  @ManyToOne(() => User, user => user.posts)
+  @JoinColumn({
+    name: 'user_id',
+  })
+  user: User['id']
 
   constructor() {
     if (!this.id) {

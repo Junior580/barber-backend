@@ -1,25 +1,34 @@
 import { Post } from '../infra/typeorm/entities/Posts'
 import { IPostRepository } from '../repositories/interfaces/IPostRepository'
 
-export class CreateUserService {
-  constructor(private readonly usersRepository: IPostRepository) {}
+//apagar
+import { AppDataSource } from '../../../shared/infra/typeorm/data-source'
+import AppError from '../../../shared/errors/AppError'
+import { User } from '../../users/infra/typeorm/entities/Users'
+export const postsRepository = AppDataSource.getRepository(Post)
+export const userRepository = AppDataSource.getRepository(User)
 
-  public async execute({ name, email, password }: IRequest): Promise<Post> {
-    const userExists = await this.usersRepository.findOneByEmail(email)
+interface IRequest {
+  id: string
+  tittle: string
+  message: string
+}
+export class CreatePostService {
+  public async execute({ id, tittle, message }: IRequest): Promise<Post> {
+    const userExists = await userRepository.findOneBy({ id })
 
-    // if (userExists) {
-    //   throw new AppError('User already exists', 400)
-    // }
+    if (!userExists) {
+      throw new AppError('User does not exists.', 401)
+    }
 
-    // const hashedPass = await hash(password, 8)
+    const post = postsRepository.create({
+      tittle,
+      message,
+      user: id,
+    })
 
-    // const user = this.usersRepository.create({
-    //   id: uuid().toUpperCase(),
-    //   email,
-    //   name,
-    //   password: hashedPass,
-    // })
+    await postsRepository.save(post)
 
-    // return user
+    return post
   }
 }

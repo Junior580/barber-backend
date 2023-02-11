@@ -12,7 +12,7 @@ import { Post } from '../../../../posts/infra/typeorm/entities/Posts'
 
 @Entity('users')
 export class User {
-  @PrimaryColumn()
+  @PrimaryColumn({ primary: true })
   id: string
 
   @Column()
@@ -32,7 +32,7 @@ export class User {
   updated_at: Date
 
   @OneToMany(() => Post, post => post.user)
-  post: Post[]
+  posts: Post[]
 
   constructor() {
     if (!this.id) {

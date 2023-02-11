@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1676149132587" clover="3.2.0">
-  <project timestamp="1676149132587" name="All files">
+<coverage generated="1676149239808" clover="3.2.0">
+  <project timestamp="1676149239808" name="All files">
     <metrics statements="241" coveredstatements="237" conditionals="35" coveredconditionals="35" methods="18" coveredmethods="17" elements="294" coveredelements="289" complexity="0" loc="241" ncloc="241" packages="5" files="8" classes="8"/>
     <package name="modules.posts.infra.typeorm.entities">
       <metrics statements="37" coveredstatements="33" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
