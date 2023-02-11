@@ -6,7 +6,6 @@ import {
   UpdateDateColumn,
   ManyToOne,
 } from 'typeorm'
-import { Exclude } from 'class-transformer'
 import { v4 as uuid } from 'uuid'
 import { User } from '../../../../users/infra/typeorm/entities/Users'
 
@@ -20,10 +19,6 @@ export class Post {
 
   @Column()
   message: string
-
-  @Column()
-  @Exclude()
-  password: string
 
   @CreateDateColumn()
   created_at: Date

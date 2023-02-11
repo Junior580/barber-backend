@@ -8,7 +8,7 @@ import {
 } from 'typeorm'
 import { Exclude } from 'class-transformer'
 import { v4 as uuid } from 'uuid'
-import { Post } from '../../../../appointments/infra/typeorm/entities/Posts'
+import { Post } from '../../../../posts/infra/typeorm/entities/Posts'
 
 @Entity('users')
 export class User {

@@ -1,6 +1,6 @@
 import { InMemoryUserRepository } from '../repositories/in-memory/InMemoryUserRepository'
-import { GetUserService } from '../services/GetUserService'
 import { CreateUserService } from '../services/CreateUserService'
+import { GetUserService } from '../services/GetUserService'
 import AppError from '../../../shared/errors/AppError'
 
 let fakeUsersRepository: InMemoryUserRepository

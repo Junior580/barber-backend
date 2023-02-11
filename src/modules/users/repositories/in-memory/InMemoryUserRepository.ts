@@ -4,7 +4,7 @@ import { ICreateUserDTO } from '../../dtos/ICreateUserDTO'
 import { v4 as uuid } from 'uuid'
 
 export class InMemoryUserRepository implements IUsersRepository {
-  private users: User[] = []
+  public users: User[] = []
 
   public async findOneByEmail(email: string): Promise<User | null> {
     const user = this.users.find(user => user.email === email)

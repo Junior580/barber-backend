@@ -5,9 +5,9 @@ import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
 
 interface IRequest {
   id: string
-  name: string
-  email: string
-  password: string
+  name?: string
+  email?: string
+  password?: string
 }
 
 export class UpdateUserService {
