@@ -1,7 +1,8 @@
 import { Router } from 'express'
-import { usersRoutes } from '../../../../modules/users/infra/http/routes/users.routes'
-import { postsRoutes } from '../../../../modules/appointments/infra/http/routes/posts.routes'
-export const indexRoutes = Router()
+import { usersRoutes } from '@modules/users/infra/http/routes/users.routes'
+import { sessionsRouter } from '@modules/users/infra/http/routes/sessions.routes'
 
-indexRoutes.use('/', usersRoutes)
-indexRoutes.use('/teste', postsRoutes)
+export const routes = Router()
+
+routes.use('/', usersRoutes)
+routes.use('/sessions', sessionsRouter)

@@ -9,8 +9,15 @@
     "strict": true,
     "strictPropertyInitialization": false,
     "skipLibCheck": true,
+    "resolveJsonModule": true,
     "outDir": "./dist",
-    "rootDir": "src"
+    "rootDir": "src",
+    "baseUrl": "./src/",
+    "paths": {
+      "@modules/*": ["modules/*"],
+      "@config/*": ["config/*"],
+      "@shared/*": ["shared/*"]
+    }
   },
   "include": ["src/**/*.ts"]
 }

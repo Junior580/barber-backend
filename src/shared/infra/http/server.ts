@@ -3,10 +3,10 @@ import 'reflect-metadata'
 import express from 'express'
 
 import { AppDataSource, AppDataSourceMongo } from '../typeorm/data-source'
-import { indexRoutes } from '../http/routes/index.routes'
+import { routes } from '../http/routes/index.routes'
 import { handleError } from '../http/middlewares/HandleError'
 
-AppDataSourceMongo.initialize()
+// AppDataSourceMongo.initialize()
 
 AppDataSource.initialize()
   .then(() => {
@@ -17,7 +17,7 @@ AppDataSource.initialize()
 
     app.use(express.json())
 
-    app.use(indexRoutes)
+    app.use(routes)
 
     app.use(handleError)
 
