@@ -18,7 +18,10 @@ export class Appointment {
   @Column()
   provider_id: string
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, {
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'provider_id' })
   provider: User
 

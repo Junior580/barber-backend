@@ -49,7 +49,7 @@ export class CreateAppointmentService {
       date: appointmentDate,
     })
 
-    const dateFormatted = format(appointment.date, "dd/MM/yyyy 'às' HH:mm'h'")
+    // const dateFormatted = format(appointment.date, "dd/MM/yyyy 'às' HH:mm'h'")
 
     // await this.notificationsRepository.create({
     //   recipient_id: provider_id,

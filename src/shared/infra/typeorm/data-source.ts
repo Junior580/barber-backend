@@ -16,14 +16,14 @@ export const AppDataSource = new DataSource({
   migrations: [__dirname + '/migrations/*.{ts,js}'],
 })
 
-export const AppDataSourceMongo = new DataSource({
-  type: 'mongodb',
-  name: 'mongo',
-  host: 'localhost',
-  port: 27017,
-  database: 'gobarber',
-  useUnifiedTopology: true,
-  entities: [
-    __dirname + '../../../../modules/**/infra/typeorm/schemas/*.{ts,js}',
-  ],
-})
+// export const AppDataSourceMongo = new DataSource({
+//   type: 'mongodb',
+//   name: 'mongo',
+//   host: 'localhost',
+//   port: 27017,
+//   database: 'gobarber',
+//   useUnifiedTopology: true,
+//   entities: [
+//     __dirname + '../../../../modules/**/infra/typeorm/schemas/*.{ts,js}',
+//   ],
+// })

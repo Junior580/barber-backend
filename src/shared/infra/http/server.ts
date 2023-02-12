@@ -2,7 +2,7 @@ import 'express-async-errors'
 import 'reflect-metadata'
 import express from 'express'
 
-import { AppDataSource, AppDataSourceMongo } from '../typeorm/data-source'
+import { AppDataSource } from '../typeorm/data-source'
 import { routes } from '../http/routes/index.routes'
 import { handleError } from '../http/middlewares/HandleError'
 
