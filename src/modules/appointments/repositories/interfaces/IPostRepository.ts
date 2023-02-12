@@ -1,4 +1,4 @@
-import { Post } from '../../infra/typeorm/entities/Posts'
+import { Post } from '../../infra/typeorm/entities/Appointment'
 // import { ICreateUserDTO } from '../../dtos/ICreateUserDTO'
 
 export interface IPostRepository {

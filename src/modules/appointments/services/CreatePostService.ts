@@ -1,4 +1,4 @@
-import { Post } from '../infra/typeorm/entities/Posts'
+import { Post } from '../infra/typeorm/entities/Appointment'
 import { IPostRepository } from '../repositories/interfaces/IPostRepository'
 
 //apagar

@@ -10,16 +10,27 @@ import {
 import { v4 as uuid } from 'uuid'
 import { User } from '../../../../users/infra/typeorm/entities/Users'
 
-@Entity('posts')
-export class Post {
+@Entity('appointments')
+export class Appointment {
   @PrimaryColumn()
   id: string
 
   @Column()
-  tittle: string
+  provider_id: string
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'provider_id' })
+  provider: User
 
   @Column()
-  message: string
+  user_id: string
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User
+
+  @Column('timestamp with time zone')
+  date: Date
 
   @CreateDateColumn()
   created_at: Date
@@ -27,13 +38,13 @@ export class Post {
   @UpdateDateColumn()
   updated_at: Date
 
-  @ManyToOne(() => User, user => user.posts, {
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn({
-    name: 'user_id',
-  })
-  user: User['id']
+  // @ManyToOne(() => User, user => user.posts, {
+  //   onDelete: 'CASCADE',
+  // })
+  // @JoinColumn({
+  //   name: 'user_id',
+  // })
+  // user: User['id']
 
   constructor() {
     if (!this.id) {

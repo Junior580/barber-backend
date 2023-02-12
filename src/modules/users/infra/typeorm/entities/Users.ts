@@ -8,7 +8,7 @@ import {
 } from 'typeorm'
 import { Exclude } from 'class-transformer'
 import { v4 as uuid } from 'uuid'
-import { Post } from '../../../../posts/infra/typeorm/entities/Posts'
+import { Appointment } from '../../../../appointments/infra/typeorm/entities/Appointment'
 
 @Entity('users')
 export class User {
@@ -31,8 +31,8 @@ export class User {
   @UpdateDateColumn()
   updated_at: Date
 
-  @OneToMany(() => Post, post => post.user)
-  posts: Post[]
+  // @OneToMany(() => Appointment, appointment => appointment.user)
+  // appointment: Appointment[]
 
   constructor() {
     if (!this.id) {

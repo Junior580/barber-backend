@@ -2,12 +2,17 @@ import { AppDataSource } from '../../../../../shared/infra/typeorm/data-source'
 import { User } from '../entities/Users'
 import { IUsersRepository } from '../../../repositories/interfaces/IUserRepository'
 import { ICreateUserDTO } from '../../../dtos/ICreateUserDTO'
-
-export const userRepository = AppDataSource.getRepository(User)
+import { Repository } from 'typeorm'
 
 export class UserRepository implements IUsersRepository {
+  private userRepository: Repository<User>
+
+  constructor() {
+    this.userRepository = AppDataSource.getRepository(User)
+  }
+
   public async findOneByEmail(email: string): Promise<User | null> {
-    const user = await userRepository.findOneBy({ email })
+    const user = await this.userRepository.findOneBy({ email })
 
     return user
   }
@@ -17,30 +22,31 @@ export class UserRepository implements IUsersRepository {
     email,
     password,
   }: ICreateUserDTO): Promise<User> {
-    const user = userRepository.create({ name, email, password })
+    const user = this.userRepository.create({ name, email, password })
 
-    await userRepository.save(user)
+    await this.userRepository.save(user)
 
     return user
   }
 
   public async findAll(): Promise<User[]> {
-    const user = await userRepository.find()
+    const user = await this.userRepository.find()
 
     return user
   }
+
   public async findOneById(id: string): Promise<User | null> {
-    const user = await userRepository.findOneBy({ id })
+    const user = await this.userRepository.findOneBy({ id })
 
     return user || null
   }
 
   public async save(user: User): Promise<User> {
-    const userUpdated = await userRepository.save(user)
+    const userUpdated = await this.userRepository.save(user)
     return userUpdated
   }
 
   public async delete(id: string): Promise<void> {
-    await userRepository.delete(id)
+    await this.userRepository.delete(id)
   }
 }
