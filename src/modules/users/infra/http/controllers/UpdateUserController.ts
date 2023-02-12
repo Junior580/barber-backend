@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { UpdateUserService } from '../../../services/UpdateUserService'
 import { UserRepository } from '../../../infra/typeorm/repositories/UserRepository'
+import { instanceToInstance } from 'class-transformer'
 
 export class UpdateUserController {
   public async handle(req: Request, res: Response) {
@@ -14,6 +15,9 @@ export class UpdateUserController {
 
     const user = await updateUser.execute({ id, name, email, password })
 
-    return res.status(200).json({ msg: 'User successfully updated!', user })
+    return res.status(200).json({
+      msg: 'User successfully updated!',
+      user: instanceToInstance(user),
+    })
   }
 }

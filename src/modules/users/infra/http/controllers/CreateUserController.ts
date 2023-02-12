@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { CreateUserService } from '../../../services/CreateUserService'
 import { UserRepository } from '../../../infra/typeorm/repositories/UserRepository'
+import { instanceToInstance } from 'class-transformer'
 
 export class CreateUserController {
   public async handle(req: Request, res: Response) {
@@ -12,8 +13,6 @@ export class CreateUserController {
 
     const user = await createUser.execute({ name, email, password })
 
-    const { password: _, ...userReturn } = user
-
-    return res.status(201).json(userReturn)
+    return res.json({ user: instanceToInstance(user) })
   }
 }
