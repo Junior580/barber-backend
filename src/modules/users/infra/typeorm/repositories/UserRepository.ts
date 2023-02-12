@@ -3,8 +3,6 @@ import { User } from '../entities/Users'
 import { IUsersRepository } from '../../../repositories/interfaces/IUserRepository'
 import { ICreateUserDTO } from '../../../dtos/ICreateUserDTO'
 
-import {} from 'typeorm'
-
 export const userRepository = AppDataSource.getRepository(User)
 
 export class UserRepository implements IUsersRepository {
