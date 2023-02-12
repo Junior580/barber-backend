@@ -1,24 +1,29 @@
-import { AppDataSourceMongo } from '../../../../../shared/infra/typeorm/data-source'
+import { AppDataSourceMongo } from '@shared/infra/typeorm/data-source'
+import { Repository } from 'typeorm'
+
+import INotificationsRepository from '@modules/notifications/repositories/interface/INotificationsRepository'
+import ICreateNotificationDTO from '@modules/notifications/dtos/ICreateNotificationsDTO'
+
 import Notification from '../schemas/Notification'
 
-import INotificationsRepository from '../../../repositories/interface/INotificationsRepository'
-import ICreateNotificationDTO from '../../../dtos/ICreateNotificationsDTO'
+class NotificationsRepository implements INotificationsRepository {
+  private notificationRepository: Repository<Notification>
 
-export const notificationRepository =
-  AppDataSourceMongo.getRepository(Notification)
+  constructor() {
+    this.notificationRepository = AppDataSourceMongo.getRepository(Notification)
+  }
 
-export default class NotificationsRepository
-  implements INotificationsRepository
-{
   public async create({
     content,
     recipient_id,
   }: ICreateNotificationDTO): Promise<Notification> {
-    const notification = notificationRepository.create({
+    const notification = this.notificationRepository.create({
       content,
       recipient_id,
     })
-    await notificationRepository.save(notification)
+    await this.notificationRepository.save(notification)
     return notification
   }
 }
+
+export default NotificationsRepository

@@ -12,7 +12,6 @@ export function handleError(
       .status(error.statusCode)
       .send({ status: 'error', message: error.message })
   }
-  console.log(error)
   return res
     .status(500)
     .send({ status: 'error', message: 'Internal server error', error })

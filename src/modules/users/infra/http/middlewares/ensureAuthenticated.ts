@@ -3,24 +3,34 @@ import { verify } from 'jsonwebtoken'
 import { jwt } from '@config/auth'
 import AppError from '@shared/errors/AppError'
 
+interface ITokenPayload {
+  iat: number
+  exp: number
+  sub: string
+}
+
 export async function ensureAuthenticated(
-  req: Request,
+  request: Request,
   res: Response,
   next: NextFunction
 ) {
-  const { authorization } = req.headers
+  const { authorization } = request.headers
 
   if (!authorization) {
     throw new AppError('Unauthorized access', 401)
-    // return res.status(401).json({ Unauthorized: 'Unauthorized access' })
   }
 
   const [, token] = authorization.split(' ')
-
   try {
     const { secret } = jwt
 
-    verify(token, secret)
+    const decoded = verify(token, secret)
+
+    const { sub } = decoded as ITokenPayload
+
+    request.user = {
+      id: sub,
+    }
 
     return next()
   } catch (error) {
