@@ -1,7 +1,7 @@
-import { User } from '../infra/typeorm/entities/Users'
 import { hash } from 'bcryptjs'
+import { User } from '../infra/typeorm/entities/Users'
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
-import AppError from '../../../shared/errors/AppError'
+import AppError from '@shared/errors/AppError'
 
 interface IRequest {
   id: string

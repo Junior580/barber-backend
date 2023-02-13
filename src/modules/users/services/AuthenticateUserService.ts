@@ -1,9 +1,9 @@
-import { User } from '@modules/users/infra/typeorm/entities/Users'
-import { IUsersRepository } from '@modules/users/repositories/interfaces/IUserRepository'
-import AppError from '../../../shared/errors/AppError'
-import { jwt } from '@config/auth'
 import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
+import { User } from '@modules/users/infra/typeorm/entities/Users'
+import { IUsersRepository } from '@modules/users/repositories/interfaces/IUserRepository'
+import AppError from '@shared/errors/AppError'
+import { jwt } from '@config/auth'
 
 interface IRequest {
   email: string

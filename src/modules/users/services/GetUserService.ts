@@ -1,5 +1,5 @@
-import AppError from '../../../shared/errors/AppError'
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
+import AppError from '@shared/errors/AppError'
 
 export class GetUserService {
   constructor(private readonly usersRepository: IUsersRepository) {}

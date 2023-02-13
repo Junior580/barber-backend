@@ -5,6 +5,7 @@ import express from 'express'
 import { AppDataSource } from '../typeorm/data-source'
 import { routes } from '../http/routes/index.routes'
 import { handleError } from '../http/middlewares/HandleError'
+import uploadConfig from '@config/upload'
 
 // AppDataSourceMongo.initialize()
 
@@ -16,6 +17,8 @@ AppDataSource.initialize()
     const app = express()
 
     app.use(express.json())
+
+    app.use('/files', express.static(uploadConfig.directory))
 
     app.use(routes)
 
