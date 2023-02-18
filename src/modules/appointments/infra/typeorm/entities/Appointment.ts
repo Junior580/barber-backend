@@ -10,7 +10,7 @@ import {
 import { v4 as uuid } from 'uuid'
 import { User } from '../../../../users/infra/typeorm/entities/Users'
 
-@Entity('appointments')
+@Entity('appointments', { database: 'postgres' })
 export class Appointment {
   @PrimaryColumn()
   id: string

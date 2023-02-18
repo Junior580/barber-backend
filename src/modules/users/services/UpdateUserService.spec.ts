@@ -1,4 +1,4 @@
-import { InMemoryUserRepository } from '../repositories/in-memory/InMemoryUserRepository'
+import { InMemoryUserRepository } from '../repositories/InMemory/InMemoryUserRepository'
 import { CreateUserService } from '../services/CreateUserService'
 import { UpdateUserService } from '../services/UpdateUserService'
 import AppError from '../../../shared/errors/AppError'

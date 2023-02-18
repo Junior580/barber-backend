@@ -3,11 +3,18 @@ import 'reflect-metadata'
 import express from 'express'
 
 import { AppDataSource } from '../typeorm/data-source'
+import { AppDataSourceMongo } from '../typeorm/mongoData-source'
 import { routes } from '../http/routes/index.routes'
 import { handleError } from '../http/middlewares/HandleError'
 import uploadConfig from '@config/upload'
 
-// AppDataSourceMongo.initialize()
+AppDataSourceMongo.initialize()
+  .then(() => {
+    console.log('📦 Mongo has been initialized!')
+  })
+  .catch(err => {
+    return console.error('❌ Error during Data Source initialization', err)
+  })
 
 AppDataSource.initialize()
   .then(() => {

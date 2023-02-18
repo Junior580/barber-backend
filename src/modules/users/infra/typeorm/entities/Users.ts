@@ -4,13 +4,13 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
+  // OneToMany,
 } from 'typeorm'
 import { Exclude } from 'class-transformer'
 import { v4 as uuid } from 'uuid'
-import { Appointment } from '../../../../appointments/infra/typeorm/entities/Appointment'
+// import { Appointment } from '../../../../appointments/infra/typeorm/entities/Appointment'
 
-@Entity('users')
+@Entity('users', { database: 'postgres' })
 export class User {
   @PrimaryColumn({ primary: true })
   id: string

@@ -7,7 +7,7 @@ import {
   ObjectIdColumn,
 } from 'typeorm'
 
-@Entity('notifications')
+@Entity('notifications', { database: 'mongodb' })
 export default class Notification {
   @ObjectIdColumn()
   id: ObjectID
