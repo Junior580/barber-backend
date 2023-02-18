@@ -1,7 +1,7 @@
-import { hash } from 'bcryptjs'
 import { User } from '../infra/typeorm/entities/Users'
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
 import AppError from '@shared/errors/AppError'
+import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'
 
 interface ICreateUserRequest {
   name: string
@@ -12,7 +12,10 @@ interface ICreateUserRequest {
 type ICreateUserResponse = User
 
 export class CreateUserService {
-  constructor(private readonly usersRepository: IUsersRepository) {}
+  constructor(
+    private readonly usersRepository: IUsersRepository,
+    private hashProvider: IHashProvider
+  ) {}
 
   public async execute({
     name,
@@ -25,7 +28,7 @@ export class CreateUserService {
       throw new AppError('User already exists', 400)
     }
 
-    const hashedPass = await hash(password, 8)
+    const hashedPass = await this.hashProvider.generateHash(password)
 
     const user = this.usersRepository.create({
       email,

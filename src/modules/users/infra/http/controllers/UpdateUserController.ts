@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { UpdateUserService } from '../../../services/UpdateUserService'
 import { UserRepository } from '../../../infra/typeorm/repositories/UserRepository'
+import { BCryptHashProvider } from '@modules/users/providers/HashProvider/implementations/BCryptHashProvider'
 import { instanceToInstance } from 'class-transformer'
 
 export class UpdateUserController {
@@ -11,7 +12,9 @@ export class UpdateUserController {
 
     const userRepo = new UserRepository()
 
-    const updateUser = new UpdateUserService(userRepo)
+    const hashProvider = new BCryptHashProvider()
+
+    const updateUser = new UpdateUserService(userRepo, hashProvider)
 
     const user = await updateUser.execute({ id, name, email, password })
 

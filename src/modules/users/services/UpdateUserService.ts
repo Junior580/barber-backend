@@ -1,7 +1,7 @@
-import { hash } from 'bcryptjs'
 import { User } from '../infra/typeorm/entities/Users'
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
 import AppError from '@shared/errors/AppError'
+import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'
 
 interface IUpdateUserRequest {
   id: string
@@ -13,7 +13,10 @@ interface IUpdateUserRequest {
 type IUpdateUserResponse = User
 
 export class UpdateUserService {
-  constructor(private readonly usersRepository: IUsersRepository) {}
+  constructor(
+    private readonly usersRepository: IUsersRepository,
+    private hashProvider: IHashProvider
+  ) {}
 
   public async execute({
     id,
@@ -36,7 +39,7 @@ export class UpdateUserService {
     }
 
     if (password) {
-      const hashedPass = await hash(password, 8)
+      const hashedPass = await this.hashProvider.generateHash(password)
       user.password = hashedPass
     }
 

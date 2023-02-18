@@ -1,4 +1,3 @@
-// import { User } from '../infra/typeorm/entities/Users'
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
 import { IUserTokensRepository } from '../repositories/interfaces/IUserTokensRepository'
 import IMailProvider from '@shared/container/MailProvider/models/IMailProvider'

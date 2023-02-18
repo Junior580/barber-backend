@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { CreateUserService } from '../../../services/CreateUserService'
 import { UserRepository } from '../../../infra/typeorm/repositories/UserRepository'
+import { BCryptHashProvider } from '@modules/users/providers/HashProvider/implementations/BCryptHashProvider'
 import { instanceToInstance } from 'class-transformer'
 
 export class CreateUserController {
@@ -9,7 +10,9 @@ export class CreateUserController {
 
     const userRepo = new UserRepository()
 
-    const createUser = new CreateUserService(userRepo)
+    const hashProvider = new BCryptHashProvider()
+
+    const createUser = new CreateUserService(userRepo, hashProvider)
 
     const user = await createUser.execute({ name, email, password })
 
