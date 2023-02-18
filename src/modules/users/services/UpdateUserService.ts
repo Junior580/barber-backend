@@ -3,17 +3,24 @@ import { User } from '../infra/typeorm/entities/Users'
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
 import AppError from '@shared/errors/AppError'
 
-interface IRequest {
+interface IUpdateUserRequest {
   id: string
   name?: string
   email?: string
   password?: string
 }
 
+type IUpdateUserResponse = User
+
 export class UpdateUserService {
   constructor(private readonly usersRepository: IUsersRepository) {}
 
-  public async execute({ id, name, email, password }: IRequest): Promise<User> {
+  public async execute({
+    id,
+    name,
+    email,
+    password,
+  }: IUpdateUserRequest): Promise<IUpdateUserResponse> {
     const user = await this.usersRepository.findOneById(id)
 
     if (!user) {

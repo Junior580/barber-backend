@@ -10,7 +10,9 @@
     "migration:run": "typeorm-ts-node-commonjs -d ./src/shared/infra/typeorm/data-source.ts migration:run",
     "migration:revert": "typeorm-ts-node-commonjs -d ./src/shared/infra/typeorm/data-source.ts migration:revert",
     "husky:prepare": "husky install",
-    "test": "jest"
+    "test": "jest --passWithNoTests",
+    "test:watch": "yarn test --watch",
+    "test:staged": "yarn test --findRelatedTests"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
