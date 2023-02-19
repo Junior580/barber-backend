@@ -1,12 +1,12 @@
 import { Request, Response } from 'express'
 import { DeleteUserService } from '../../../services/DeleteUserService'
-import { UserRepository } from '../../../infra/typeorm/repositories/UserRepository'
+import { UsersRepository } from '../../typeorm/repositories/UsersRepository'
 
 export class DeleteUserController {
   public async handle(req: Request, res: Response) {
     const { id } = req.params
 
-    const userRepo = new UserRepository()
+    const userRepo = new UsersRepository()
 
     const user = new DeleteUserService(userRepo)
 

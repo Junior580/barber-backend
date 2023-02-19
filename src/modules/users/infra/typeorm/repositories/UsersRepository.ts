@@ -1,10 +1,10 @@
+import { Repository } from 'typeorm'
 import { AppDataSource } from '../../../../../shared/infra/typeorm/data-source'
 import { User } from '../entities/Users'
 import { IUsersRepository } from '../../../repositories/interfaces/IUserRepository'
 import { ICreateUserDTO } from '../../../dtos/ICreateUserDTO'
-import { Repository } from 'typeorm'
 
-export class UserRepository implements IUsersRepository {
+export class UsersRepository implements IUsersRepository {
   private userRepository: Repository<User>
 
   constructor() {

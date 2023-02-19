@@ -1,6 +1,6 @@
 import AppError from '../../../shared/errors/AppError'
 
-import InMemoryMailProvider from '@shared/container/MailProvider/inMemory/InMemoryMailProvider'
+import InMemoryMailProvider from '@shared/container/providers/MailProvider/inMemory/InMemoryMailProvider'
 import { InMemoryUserRepository } from '../repositories/InMemory/InMemoryUserRepository'
 import { InMemoryUserTokensRepository } from '../repositories/InMemory/InMemoryUserTokensRepository'
 import { SendForgotPasswordEmailService } from './SendForgotPasswordEmailService'

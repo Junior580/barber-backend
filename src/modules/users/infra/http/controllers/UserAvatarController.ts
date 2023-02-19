@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
 import { instanceToInstance } from 'class-transformer'
-import { UserRepository } from '../../../infra/typeorm/repositories/UserRepository'
+import { UsersRepository } from '../../typeorm/repositories/UsersRepository'
 import { UpdateUserAvatarService } from '@modules/users/services/UpdateUserAvatarService'
 
 export class UpdateUserAvatarController {
   public async handle(req: Request, res: Response): Promise<Response> {
-    const userRepo = new UserRepository()
+    const userRepo = new UsersRepository()
 
     const updateUserAvatar = new UpdateUserAvatarService(userRepo)
 

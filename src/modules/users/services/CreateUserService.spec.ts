@@ -1,14 +1,22 @@
 import { InMemoryUserRepository } from '../repositories/InMemory/InMemoryUserRepository'
 import { CreateUserService } from '../services/CreateUserService'
+import { InMemoryHashProvider } from '../providers/HashProvider/inMemory/InMemoryHashProvider'
+
 import AppError from '../../../shared/errors/AppError'
 
 let fakeUsersRepository: InMemoryUserRepository
 let createUser: CreateUserService
+let inMemoryHashProvider: InMemoryHashProvider
 
 describe('Create User', () => {
   beforeEach(() => {
     fakeUsersRepository = new InMemoryUserRepository()
-    createUser = new CreateUserService(fakeUsersRepository)
+    inMemoryHashProvider = new InMemoryHashProvider()
+
+    createUser = new CreateUserService(
+      fakeUsersRepository,
+      inMemoryHashProvider
+    )
   })
 
   it('should be able to create a new user', async () => {

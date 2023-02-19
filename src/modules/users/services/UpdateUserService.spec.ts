@@ -1,17 +1,28 @@
 import { InMemoryUserRepository } from '../repositories/InMemory/InMemoryUserRepository'
 import { CreateUserService } from '../services/CreateUserService'
 import { UpdateUserService } from '../services/UpdateUserService'
+import { InMemoryHashProvider } from '../providers/HashProvider/inMemory/InMemoryHashProvider'
+
 import AppError from '../../../shared/errors/AppError'
 
 let fakeUsersRepository: InMemoryUserRepository
 let createUser: CreateUserService
 let updateUser: UpdateUserService
+let inMemoryHashProvider: InMemoryHashProvider
 
 describe('update users', () => {
   beforeEach(async () => {
     fakeUsersRepository = new InMemoryUserRepository()
-    createUser = new CreateUserService(fakeUsersRepository)
-    updateUser = new UpdateUserService(fakeUsersRepository)
+    inMemoryHashProvider = new InMemoryHashProvider()
+
+    createUser = new CreateUserService(
+      fakeUsersRepository,
+      inMemoryHashProvider
+    )
+    updateUser = new UpdateUserService(
+      fakeUsersRepository,
+      inMemoryHashProvider
+    )
   })
 
   it('should be able to update an existing user', async () => {

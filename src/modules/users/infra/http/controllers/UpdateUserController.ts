@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { UpdateUserService } from '../../../services/UpdateUserService'
-import { UserRepository } from '../../../infra/typeorm/repositories/UserRepository'
+import { UserRepository } from '../../typeorm/repositories/UsersRepository'
 import { BCryptHashProvider } from '@modules/users/providers/HashProvider/implementations/BCryptHashProvider'
 import { instanceToInstance } from 'class-transformer'
 

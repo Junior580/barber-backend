@@ -1,6 +1,6 @@
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
 import { IUserTokensRepository } from '../repositories/interfaces/IUserTokensRepository'
-import IMailProvider from '@shared/container/MailProvider/models/IMailProvider'
+import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider'
 import AppError from '@shared/errors/AppError'
 
 interface IRequest {

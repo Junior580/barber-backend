@@ -1,7 +1,8 @@
+import { addHours, differenceInHours, isAfter } from 'date-fns'
+
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
 import { IUserTokensRepository } from '../repositories/interfaces/IUserTokensRepository'
-import { hash } from 'bcryptjs'
-
+import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'
 import AppError from '@shared/errors/AppError'
 
 interface IRequest {
@@ -12,7 +13,8 @@ interface IRequest {
 export class ResetPasswordService {
   constructor(
     private usersRepository: IUsersRepository,
-    private userTokensRepository: IUserTokensRepository
+    private userTokensRepository: IUserTokensRepository,
+    private hashProvider: IHashProvider
   ) {}
 
   public async execute({ password, token }: IRequest): Promise<void> {
@@ -25,10 +27,17 @@ export class ResetPasswordService {
     const user = await this.usersRepository.findOneById(userToken.user_id)
 
     if (!user) {
-      throw new AppError('User  does not exists')
+      throw new AppError('User does not exists')
     }
 
-    user.password = password
+    const tokenCreatedAt = userToken.created_at
+    const compareDate = addHours(tokenCreatedAt, 2)
+
+    if (isAfter(Date.now(), compareDate)) {
+      throw new AppError('Token expired')
+    }
+
+    user.password = await this.hashProvider.generateHash(password)
 
     await this.usersRepository.save(user)
   }

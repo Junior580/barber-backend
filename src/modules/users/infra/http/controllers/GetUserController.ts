@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { GetUserService } from '../../../services/GetUserService'
-import { UserRepository } from '../../../infra/typeorm/repositories/UserRepository'
+import { UserRepository } from '../../typeorm/repositories/UsersRepository'
 import { instanceToInstance } from 'class-transformer'
 
 export class GetUserController {

@@ -1,17 +1,26 @@
 import { InMemoryUserRepository } from '../repositories/InMemory/InMemoryUserRepository'
 import { CreateUserService } from '../services/CreateUserService'
 import { AuthenticateUserService } from './AuthenticateUserService'
+import { InMemoryHashProvider } from '../providers/HashProvider/inMemory/InMemoryHashProvider'
 import AppError from '../../../shared/errors/AppError'
 
 let fakeUsersRepository: InMemoryUserRepository
 let createUser: CreateUserService
 let authenticateUser: AuthenticateUserService
+let inMemoryHashProvider: InMemoryHashProvider
 
 describe('Create User', () => {
   beforeEach(() => {
     fakeUsersRepository = new InMemoryUserRepository()
-    createUser = new CreateUserService(fakeUsersRepository)
-    authenticateUser = new AuthenticateUserService(fakeUsersRepository)
+    inMemoryHashProvider = new InMemoryHashProvider()
+    createUser = new CreateUserService(
+      fakeUsersRepository,
+      inMemoryHashProvider
+    )
+    authenticateUser = new AuthenticateUserService(
+      fakeUsersRepository,
+      inMemoryHashProvider
+    )
   })
 
   it('should be able to authenticate', async () => {

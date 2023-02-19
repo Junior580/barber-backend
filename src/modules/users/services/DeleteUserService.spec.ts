@@ -1,17 +1,25 @@
 import { InMemoryUserRepository } from '../repositories/InMemory/InMemoryUserRepository'
 import { CreateUserService } from '../services/CreateUserService'
 import { DeleteUserService } from '../services/DeleteUserService'
+import { InMemoryHashProvider } from '../providers/HashProvider/inMemory/InMemoryHashProvider'
+
 import AppError from '../../../shared/errors/AppError'
 
 let fakeUsersRepository: InMemoryUserRepository
 let deleteUser: DeleteUserService
 let createUser: CreateUserService
+let inMemoryHashProvider: InMemoryHashProvider
 
 describe('delete users', () => {
   beforeEach(async () => {
     fakeUsersRepository = new InMemoryUserRepository()
+    inMemoryHashProvider = new InMemoryHashProvider()
+
+    createUser = new CreateUserService(
+      fakeUsersRepository,
+      inMemoryHashProvider
+    )
     deleteUser = new DeleteUserService(fakeUsersRepository)
-    createUser = new CreateUserService(fakeUsersRepository)
   })
 
   it('should be able to delete an existing user', async () => {
