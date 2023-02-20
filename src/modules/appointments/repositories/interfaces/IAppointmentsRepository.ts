@@ -4,7 +4,6 @@ import { IFindAllInMonthFromProviderDTO } from '../../dtos/IFindAllInMonthFromPr
 import { IFindAllInDayFromProviderDTO } from '../../dtos/IFindAllInDayFromProviderDTO'
 
 export interface IAppointmentsRepository {
-  // define o formato que espera  :  Sera uma Promise que precisa esperar um retorno, é do tipo Appointment
   create(data: ICreateAppointmentDTO): Promise<Appointment>
   findByDate(date: Date, provider_id: string): Promise<Appointment | undefined>
   findAllInMonthFromProvider(

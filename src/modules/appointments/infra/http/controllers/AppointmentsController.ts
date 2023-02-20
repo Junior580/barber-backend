@@ -1,10 +1,10 @@
 import { Request, Response } from 'express'
 
 import { CreateAppointmentService } from '@modules/appointments/services/CreateAppointmentService'
-import AppointmentsRepository from '../../typeorm/repositories/AppointmentsRepository'
+import { AppointmentsRepository } from '../../typeorm/repositories/AppointmentsRepository'
 import { parseISO } from 'date-fns'
 
-export default class AppointmentController {
+export class AppointmentController {
   public async handle(request: Request, response: Response): Promise<Response> {
     const user_id = request.user.id
 

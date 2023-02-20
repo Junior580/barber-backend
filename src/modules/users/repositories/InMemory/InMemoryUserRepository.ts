@@ -1,6 +1,7 @@
 import { User } from '../../infra/typeorm/entities/Users'
 import { IUsersRepository } from '../interfaces/IUserRepository'
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO'
+import { IFindAllProvidersDTO } from '@modules/users/dtos/IFindAllProvidersDTO'
 // import { v4 as uuid } from 'uuid'
 
 export class InMemoryUserRepository implements IUsersRepository {
@@ -40,6 +41,18 @@ export class InMemoryUserRepository implements IUsersRepository {
     this.users.push(user)
 
     return user
+  }
+
+  public async findAllProviders({
+    expect_user_id,
+  }: IFindAllProvidersDTO): Promise<User[]> {
+    let { users } = this
+
+    if (expect_user_id) {
+      users = this.users.filter(user => user.id !== expect_user_id)
+    }
+
+    return users
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

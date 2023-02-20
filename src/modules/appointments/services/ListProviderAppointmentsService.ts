@@ -1,6 +1,6 @@
 import AppError from '@shared/errors/AppError'
 import { Appointment } from '../infra/typeorm/entities/Appointment'
-import IAppointmentsRepository from '../repositories/interfaces/IAppointmentsRepository'
+import { IAppointmentsRepository } from '../repositories/interfaces/IAppointmentsRepository'
 
 interface IRequest {
   provider_id: string

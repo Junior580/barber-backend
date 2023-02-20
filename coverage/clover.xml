@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1676858256276" clover="3.2.0">
-  <project timestamp="1676858256276" name="All files">
-    <metrics statements="433" coveredstatements="350" conditionals="52" coveredconditionals="48" methods="18" coveredmethods="16" elements="503" coveredelements="414" complexity="0" loc="433" ncloc="433" packages="2" files="10" classes="10"/>
+<coverage generated="1676864182773" clover="3.2.0">
+  <project timestamp="1676864182773" name="All files">
+    <metrics statements="460" coveredstatements="375" conditionals="55" coveredconditionals="50" methods="20" coveredmethods="18" elements="535" coveredelements="443" complexity="0" loc="460" ncloc="460" packages="2" files="11" classes="11"/>
     <package name="appointments.services">
-      <metrics statements="105" coveredstatements="66" conditionals="11" coveredconditionals="9" methods="3" coveredmethods="2"/>
+      <metrics statements="132" coveredstatements="91" conditionals="14" coveredconditionals="11" methods="5" coveredmethods="4"/>
       <file name="CreateAppointmentService.ts" path="/home/junior/documents/TypeORM/TypeORM4/src/modules/appointments/services/CreateAppointmentService.ts">
         <metrics statements="68" coveredstatements="66" conditionals="10" coveredconditionals="9" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
@@ -114,6 +114,36 @@
         <line num="35" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
+      </file>
+      <file name="ListProvidersService.ts" path="/home/junior/documents/TypeORM/TypeORM4/src/modules/appointments/services/ListProvidersService.ts">
+        <metrics statements="27" coveredstatements="25" conditionals="3" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
       </file>
     </package>
     <package name="users.services">

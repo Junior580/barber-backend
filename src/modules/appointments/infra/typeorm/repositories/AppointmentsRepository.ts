@@ -2,14 +2,14 @@ import { Repository, Raw } from 'typeorm'
 import { AppDataSource } from '@shared/infra/typeorm/data-source'
 
 import { IAppointmentsRepository } from '@modules/appointments/repositories/interfaces/IAppointmentsRepository'
-import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO'
+import { ICreateAppointmentDTO } from '@modules/appointments/dtos/ICreateAppointmentDTO'
 
-import IFindAllInMonthFromProviderDTO from '@modules/appointments/dtos/IFindAllInMonthFromProviderDTO'
-import IFindAllInDayFromProviderDTO from '@modules/appointments/dtos/IFindAllInDayFromProviderDTO'
+import { IFindAllInMonthFromProviderDTO } from '@modules/appointments/dtos/IFindAllInMonthFromProviderDTO'
+import { IFindAllInDayFromProviderDTO } from '@modules/appointments/dtos/IFindAllInDayFromProviderDTO'
 
 import { Appointment } from '../entities/Appointment'
 
-class AppointmentsRepository implements IAppointmentsRepository {
+export class AppointmentsRepository implements IAppointmentsRepository {
   private appointmentRepository: Repository<Appointment>
 
   constructor() {
@@ -85,5 +85,3 @@ class AppointmentsRepository implements IAppointmentsRepository {
     return appointment
   }
 }
-
-export default AppointmentsRepository
