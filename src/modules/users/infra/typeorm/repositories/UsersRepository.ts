@@ -54,9 +54,7 @@ export class UsersRepository implements IUsersRepository {
 
     if (expect_user_id) {
       users = await this.userRepository.find({
-        where: {
-          id: Not(expect_user_id),
-        },
+        where: { id: Not(expect_user_id) },
       })
     } else {
       users = await this.userRepository.find()

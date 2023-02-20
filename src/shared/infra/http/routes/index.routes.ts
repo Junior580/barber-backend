@@ -9,7 +9,7 @@ import { providersRouter } from '@modules/appointments/infra/http/routes/provide
 export const routes = Router()
 
 routes.use('/appointments', appointmentsRouter)
-routes.use('/providers', profileRouter)
+routes.use('/providers', providersRouter)
 routes.use('/users', usersRoutes)
 routes.use('/sessions', sessionsRouter)
 routes.use('/password', passwordRouter)
