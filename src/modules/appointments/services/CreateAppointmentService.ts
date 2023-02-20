@@ -1,5 +1,5 @@
 import { startOfHour, isBefore, getHours } from 'date-fns'
-import IAppointmentsRepository from '../repositories/IAppointmentsRepository'
+import { IAppointmentsRepository } from '../repositories/interfaces/IAppointmentsRepository'
 import { Appointment } from '../infra/typeorm/entities/Appointment'
 import AppError from '@shared/errors/AppError'
 // import INotificationsRepository from '@modules/notifications/repositories/interface/INotificationsRepository'
