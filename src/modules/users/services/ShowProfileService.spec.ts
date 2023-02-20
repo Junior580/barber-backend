@@ -1,12 +1,12 @@
 import { InMemoryUserRepository } from '../repositories/InMemory/InMemoryUserRepository'
-import { CreateUserService } from '../services/CreateUserService'
-import { GetUserService } from '../services/GetUserService'
+import { CreateUserService } from './CreateUserService'
+import { ShowProfileService } from './ShowProfileService'
 import { InMemoryHashProvider } from '../providers/HashProvider/inMemory/InMemoryHashProvider'
 
 import AppError from '../../../shared/errors/AppError'
 
 let fakeUsersRepository: InMemoryUserRepository
-let getUser: GetUserService
+let getUser: ShowProfileService
 let createUser: CreateUserService
 let inMemoryHashProvider: InMemoryHashProvider
 
@@ -19,7 +19,7 @@ describe('Get users', () => {
       fakeUsersRepository,
       inMemoryHashProvider
     )
-    getUser = new GetUserService(fakeUsersRepository)
+    getUser = new ShowProfileService(fakeUsersRepository)
   })
 
   it('should be able to get users', async () => {
