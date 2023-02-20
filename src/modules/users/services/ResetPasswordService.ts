@@ -1,4 +1,4 @@
-import { addHours, differenceInHours, isAfter } from 'date-fns'
+import { addHours, isAfter } from 'date-fns'
 
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
 import { IUserTokensRepository } from '../repositories/interfaces/IUserTokensRepository'
@@ -31,6 +31,7 @@ export class ResetPasswordService {
     }
 
     const tokenCreatedAt = userToken.created_at
+
     const compareDate = addHours(tokenCreatedAt, 2)
 
     if (isAfter(Date.now(), compareDate)) {

@@ -1,7 +1,7 @@
 import { User } from '../../infra/typeorm/entities/Users'
 import { IUsersRepository } from '../interfaces/IUserRepository'
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO'
-import { v4 as uuid } from 'uuid'
+// import { v4 as uuid } from 'uuid'
 
 export class InMemoryUserRepository implements IUsersRepository {
   public users: User[] = []
@@ -42,6 +42,7 @@ export class InMemoryUserRepository implements IUsersRepository {
     return user
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async delete(id: string): Promise<void> {
     this.users.pop()
   }

@@ -1,4 +1,4 @@
-import { startOfHour, isBefore, getHours, format } from 'date-fns'
+import { startOfHour, isBefore, getHours } from 'date-fns'
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository'
 import { Appointment } from '../infra/typeorm/entities/Appointment'
 import AppError from '@shared/errors/AppError'

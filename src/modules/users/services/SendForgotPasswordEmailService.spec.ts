@@ -1,13 +1,13 @@
 import AppError from '../../../shared/errors/AppError'
 
-import InMemoryMailProvider from '@shared/container/providers/MailProvider/inMemory/InMemoryMailProvider'
+import { InMemoryMailProvider } from '@shared/container/providers/MailProvider/inMemory/InMemoryMailProvider'
 import { InMemoryUserRepository } from '../repositories/InMemory/InMemoryUserRepository'
-import { InMemoryUserTokensRepository } from '../repositories/InMemory/InMemoryUserTokensRepository'
 import { SendForgotPasswordEmailService } from './SendForgotPasswordEmailService'
+import { InMemoryUserTokensRepository } from '../repositories/InMemory/InMemoryUserTokensRepository'
 
 let inMemoryUserRepository: InMemoryUserRepository
-let inMemoryUserTokensRepository: InMemoryUserTokensRepository
 let inMemoryMailProvider: InMemoryMailProvider
+let inMemoryUserTokensRepository: InMemoryUserTokensRepository
 let sendForgotPasswordEmailService: SendForgotPasswordEmailService
 
 describe('SendForgotPasswordEmail', () => {
@@ -23,7 +23,7 @@ describe('SendForgotPasswordEmail', () => {
   })
 
   it('should be able recover the password using the email', async () => {
-    const sendMail = jest.spyOn(inMemoryMailProvider, 'sendMail')
+    const sendMail = jest.spyOn(inMemoryMailProvider, 'sendMailMessage')
 
     await inMemoryUserRepository.create({
       name: 'user1',

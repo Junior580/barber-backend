@@ -1,17 +1,28 @@
 import { Request, Response } from 'express'
 
 import { SendForgotPasswordEmailService } from '@modules/users/services/SendForgotPasswordEmailService'
-import { UserRepository } from '../../typeorm/repositories/UsersRepository'
-import { Usertoken } from ''
-import { BCryptHashProvider } from '@modules/users/providers/HashProvider/implementations/BCryptHashProvider'
+import { UsersRepository } from '../../typeorm/repositories/UsersRepository'
+import { UserTokenRepository } from '../../typeorm/repositories/UserTokensRepository'
+import { EtherealMailProvider } from '@shared/container/providers/MailProvider/implementations/EtherealMailProvider'
+import { HandlebarsMailTemplateProvider } from '@shared/container/providers/MailTemplateProvider/implementations/HandlebarsMailTemplateProvider'
 
 export class ForgotPasswordController {
   public async handle(request: Request, response: Response): Promise<Response> {
     const { email } = request.body
 
-    const userRepo = new UserRepository()
+    const userRepo = new UsersRepository()
 
-    const sendForgotPasswordEmail = new SendForgotPasswordEmailService(userRepo)
+    const handleMailTemplate = new HandlebarsMailTemplateProvider()
+
+    const mailProvider = new EtherealMailProvider(handleMailTemplate)
+
+    const tokenRepo = new UserTokenRepository()
+
+    const sendForgotPasswordEmail = new SendForgotPasswordEmailService(
+      userRepo,
+      mailProvider,
+      tokenRepo
+    )
 
     await sendForgotPasswordEmail.execute({
       email,
