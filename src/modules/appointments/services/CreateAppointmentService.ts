@@ -1,8 +1,8 @@
-import { startOfHour, isBefore, getHours } from 'date-fns'
-import { IAppointmentsRepository } from '../repositories/interfaces/IAppointmentsRepository'
+import { startOfHour, isBefore, getHours, format } from 'date-fns'
 import { Appointment } from '../infra/typeorm/entities/Appointment'
 import AppError from '@shared/errors/AppError'
-// import INotificationsRepository from '@modules/notifications/repositories/interface/INotificationsRepository'
+import INotificationsRepository from '@modules/notifications/repositories/interface/INotificationsRepository'
+import { IAppointmentsRepository } from '../repositories/interfaces/IAppointmentsRepository'
 
 interface IRequestAppointment {
   provider_id: string
@@ -12,7 +12,8 @@ interface IRequestAppointment {
 
 export class CreateAppointmentService {
   constructor(
-    private readonly appointmentsRepository: IAppointmentsRepository // private readonly notificationsRepository: INotificationsRepository
+    private readonly appointmentsRepository: IAppointmentsRepository,
+    private readonly notificationsRepository: INotificationsRepository
   ) {}
 
   public async execute({
@@ -49,12 +50,12 @@ export class CreateAppointmentService {
       date: appointmentDate,
     })
 
-    // const dateFormatted = format(appointment.date, "dd/MM/yyyy 'às' HH:mm'h'")
+    const dateFormatted = format(appointment.date, "dd/MM/yyyy 'às' HH:mm'h'")
 
-    // await this.notificationsRepository.create({
-    //   recipient_id: provider_id,
-    //   content: `Novo agendamento para dia ${dateFormatted}`,
-    // })
+    await this.notificationsRepository.create({
+      recipient_id: provider_id,
+      content: `Novo agendamento para dia ${dateFormatted}`,
+    })
 
     // await this.cacheProvider.invalidate(
     //   `provider-appointments:${provider_id}:${format(

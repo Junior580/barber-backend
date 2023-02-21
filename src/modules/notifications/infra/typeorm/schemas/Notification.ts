@@ -5,25 +5,27 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ObjectIdColumn,
+  PrimaryColumn,
 } from 'typeorm'
+import { v4 as uuid } from 'uuid'
 
-@Entity('notifications', { database: 'mongodb' })
-export default class Notification {
+@Entity('notifications', { database: 'GoBarber' })
+export class Notification {
   @ObjectIdColumn()
   id: ObjectID
 
   @Column()
   content: string
 
-  @Column('uuid')
+  @Column()
   recipient_id: string
 
-  @Column({ default: false })
-  read: boolean
+  // @Column({ default: false })
+  // read: boolean
 
-  @CreateDateColumn()
-  created_at: Date
+  // @CreateDateColumn()
+  // created_at: Date
 
-  @UpdateDateColumn()
-  updated_at: Date
+  // @UpdateDateColumn()
+  // updated_at: Date
 }

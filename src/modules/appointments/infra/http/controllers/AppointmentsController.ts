@@ -3,6 +3,7 @@ import { Request, Response } from 'express'
 import { CreateAppointmentService } from '@modules/appointments/services/CreateAppointmentService'
 import { AppointmentsRepository } from '../../typeorm/repositories/AppointmentsRepository'
 import { parseISO } from 'date-fns'
+import { NotificationsRepository } from '@modules/notifications/mongoose/repositories/NotificationsRepository'
 
 export class AppointmentController {
   public async handle(request: Request, response: Response): Promise<Response> {
@@ -14,7 +15,12 @@ export class AppointmentController {
 
     const appointmentRepo = new AppointmentsRepository()
 
-    const createAppointment = new CreateAppointmentService(appointmentRepo)
+    const mongoRepo = new NotificationsRepository()
+
+    const createAppointment = new CreateAppointmentService(
+      appointmentRepo,
+      mongoRepo
+    )
 
     const appointment = await createAppointment.execute({
       provider_id,
