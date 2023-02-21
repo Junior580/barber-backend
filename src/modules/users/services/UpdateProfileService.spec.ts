@@ -69,11 +69,11 @@ describe('update users', () => {
       user_id: user.id,
       name: 'user1',
       email: 'user1@email.com',
-      old_password: '12345',
+      old_password: '123456',
       password: '67891',
     })
 
-    expect(updatedUser.password).toBe('batata')
+    expect(updatedUser.password).toBe('67891')
   })
 
   it('should not be able to update the password without old password', async () => {

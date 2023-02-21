@@ -31,7 +31,6 @@ export class AppointmentsRepository implements IAppointmentsRepository {
     month,
     year,
   }: IFindAllInMonthFromProviderDTO): Promise<Appointment[]> {
-    // preenche o mes com zeros a esquerd apara ter 2 digitos
     const parsedMonth = String(month).padStart(2, '0')
 
     const appointments = await this.appointmentRepository.find({
@@ -62,7 +61,7 @@ export class AppointmentsRepository implements IAppointmentsRepository {
         provider_id,
         date: Raw(
           dateFieldName =>
-            `to_char(${dateFieldName}, 'DD-MM-YYYY')= '${parsedDay}-${parsedMonth}-${year}'`
+            `to_char(${dateFieldName}, 'DD-MM-YYYY') = '${parsedDay}-${parsedMonth}-${year}'`
         ),
       },
       relations: ['user'],

@@ -1,12 +1,10 @@
-// import AppError from '../../../shared/errors/AppError'
-
 import { InMemoryUserRepository } from '@modules/users/repositories/InMemory/InMemoryUserRepository'
 import { ListProvidersService } from './ListProvidersService'
 
 let inMemoryUsersRepository: InMemoryUserRepository
 let listProviders: ListProvidersService
 
-describe('Get users', () => {
+describe('List Providers', () => {
   beforeEach(async () => {
     inMemoryUsersRepository = new InMemoryUserRepository()
     listProviders = new ListProvidersService(inMemoryUsersRepository)
