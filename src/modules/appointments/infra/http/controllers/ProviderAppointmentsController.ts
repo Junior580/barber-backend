@@ -7,7 +7,7 @@ export class ProviderAppointmentsController {
   public async handle(request: Request, response: Response): Promise<Response> {
     const provider_id = request.user.id
 
-    const { day, month, year } = request.query
+    const { day, month, year } = request.body
 
     const appointmentRepo = new AppointmentsRepository()
 
@@ -15,7 +15,7 @@ export class ProviderAppointmentsController {
       appointmentRepo
     )
 
-    const appointments = listAppointmentService.execute({
+    const appointments = await listAppointmentService.execute({
       provider_id,
       day: Number(day),
       month: Number(month),
