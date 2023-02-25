@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
   // OneToMany,
 } from 'typeorm'
-import { Exclude } from 'class-transformer'
+import { Exclude, Expose } from 'class-transformer'
 import { v4 as uuid } from 'uuid'
 // import { Appointment } from '../../../../appointments/infra/typeorm/entities/Appointment'
 
@@ -36,6 +36,13 @@ export class User {
 
   // @OneToMany(() => Appointment, appointment => appointment.user)
   // appointment: Appointment[]
+
+  @Expose({ name: 'avatar_url' })
+  getAvatarUrl(): string | null {
+    return this.avatar
+      ? `${process.env.APP_API_URL}/files/${this.avatar}`
+      : null
+  }
 
   constructor() {
     if (!this.id) {
