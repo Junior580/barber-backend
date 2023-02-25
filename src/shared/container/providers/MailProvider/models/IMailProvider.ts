@@ -8,7 +8,3 @@ export default interface IMailProvider {
     templateData,
   }: ISendMailDTO): Promise<void>
 }
-
-// export default interface IMailProvider {
-//   sendMail(to: string, body: string): Promise<void>
-// }

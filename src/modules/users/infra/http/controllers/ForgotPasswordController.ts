@@ -1,9 +1,13 @@
 import { Request, Response } from 'express'
 
+import mailConfig from '@config/mail'
+
 import { SendForgotPasswordEmailService } from '@modules/users/services/SendForgotPasswordEmailService'
 import { UsersRepository } from '../../typeorm/repositories/UsersRepository'
 import { UserTokenRepository } from '../../typeorm/repositories/UserTokensRepository'
 import { EtherealMailProvider } from '@shared/container/providers/MailProvider/implementations/EtherealMailProvider'
+import { SESMailProvider } from '@shared/container/providers/MailProvider/implementations/SESMailProvider'
+
 import { HandlebarsMailTemplateProvider } from '@shared/container/providers/MailTemplateProvider/implementations/HandlebarsMailTemplateProvider'
 
 export class ForgotPasswordController {
@@ -14,7 +18,10 @@ export class ForgotPasswordController {
 
     const handleMailTemplate = new HandlebarsMailTemplateProvider()
 
-    const mailProvider = new EtherealMailProvider(handleMailTemplate)
+    const mailProvider =
+      mailConfig.driver === 'ethereal'
+        ? new EtherealMailProvider(handleMailTemplate)
+        : new SESMailProvider(handleMailTemplate)
 
     const tokenRepo = new UserTokenRepository()
 
