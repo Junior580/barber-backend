@@ -1,7 +1,7 @@
 import { startOfHour, isBefore, getHours, format } from 'date-fns'
 import { Appointment } from '../infra/typeorm/entities/Appointment'
 import AppError from '@shared/errors/AppError'
-import INotificationsRepository from '@modules/notifications/repositories/interface/INotificationsRepository'
+import { INotificationsRepository } from '@modules/notifications/repositories/interface/INotificationsRepository'
 import { IAppointmentsRepository } from '../repositories/interfaces/IAppointmentsRepository'
 
 interface IRequestAppointment {

@@ -1,7 +1,7 @@
 import { AppDataSourceMongo } from '@shared/infra/typeorm/mongoData-source'
 import { MongoRepository } from 'typeorm'
 
-import INotificationsRepository from '@modules/notifications/repositories/interface/INotificationsRepository'
+import { INotificationsRepository } from '@modules/notifications/repositories/interface/INotificationsRepository'
 import { ICreateNotificationDTO } from '@modules/notifications/dtos/ICreateNotificationsDTO'
 
 import { Notification } from '../schemas/Notification'

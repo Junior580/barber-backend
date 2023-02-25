@@ -3,18 +3,15 @@ import 'reflect-metadata'
 import express from 'express'
 
 import { AppDataSource } from '../typeorm/data-source'
+import { AppDataSourceMongo } from '../typeorm/mongoData-source'
 import { routes } from '../http/routes/index.routes'
 import { handleError } from '../http/middlewares/HandleError'
 import uploadConfig from '@config/upload'
 
-import mongoose from 'mongoose'
-
-mongoose.connect('mongodb://127.0.0.1:27017/GoBarber').then(() => {
-  console.log('📦 Conected to MongoDB.')
-})
-
 AppDataSource.initialize()
   .then(() => {
+    AppDataSourceMongo.initialize()
+
     console.log('📦 Data Source has been initialized!')
   })
   .then(() => {

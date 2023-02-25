@@ -5,11 +5,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ObjectIdColumn,
-  PrimaryColumn,
 } from 'typeorm'
 import { v4 as uuid } from 'uuid'
 
-@Entity('notifications', { database: 'GoBarber' })
+@Entity('notifications')
 export class Notification {
   @ObjectIdColumn()
   id: ObjectID
@@ -20,12 +19,18 @@ export class Notification {
   @Column()
   recipient_id: string
 
-  // @Column({ default: false })
-  // read: boolean
+  @Column({ default: false })
+  read: boolean
 
-  // @CreateDateColumn()
-  // created_at: Date
+  @CreateDateColumn()
+  created_at: Date
 
-  // @UpdateDateColumn()
-  // updated_at: Date
+  @UpdateDateColumn()
+  updated_at: Date
+
+  constructor() {
+    if (!this.recipient_id) {
+      this.recipient_id = uuid().toUpperCase()
+    }
+  }
 }
