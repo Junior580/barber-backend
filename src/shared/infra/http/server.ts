@@ -2,6 +2,7 @@ import 'express-async-errors'
 import 'reflect-metadata'
 import express from 'express'
 
+import { errors } from 'celebrate'
 import { AppDataSource } from '../typeorm/data-source'
 import { AppDataSourceMongo } from '../typeorm/mongoData-source'
 import { routes } from '../http/routes/index.routes'
@@ -22,6 +23,8 @@ AppDataSource.initialize()
     app.use('/files', express.static(uploadConfig.directory))
 
     app.use(routes)
+
+    app.use(errors())
 
     app.use(handleError)
 

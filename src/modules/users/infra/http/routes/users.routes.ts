@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { celebrate, Segments, Joi } from 'celebrate'
 
 import { CreateUserController } from '../controllers/CreateUserController'
 import { DeleteUserController } from '../controllers/DeleteUserController'
@@ -17,7 +18,17 @@ const createUserController = new CreateUserController()
 const deleteUserController = new DeleteUserController()
 const userAvatarController = new UpdateUserAvatarController()
 
-usersRoutes.post('/', createUserController.handle)
+usersRoutes.post(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      email: Joi.string().email().required(),
+      password: Joi.string().required(),
+    },
+  }),
+  createUserController.handle
+)
 
 usersRoutes.patch(
   '/avatar',
@@ -26,4 +37,12 @@ usersRoutes.patch(
   userAvatarController.handle
 )
 
-usersRoutes.delete('/:id', deleteUserController.handle)
+usersRoutes.delete(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  deleteUserController.handle
+)

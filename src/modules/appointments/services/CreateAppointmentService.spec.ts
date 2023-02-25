@@ -1,15 +1,19 @@
 import AppError from '@shared/errors/AppError'
 import { InMemoryAppointmentsRepository } from '../repositories/InMemory/inMemoryAppointmentsRepository'
 import { CreateAppointmentService } from './CreateAppointmentService'
+import { InMemoryNotificationsRepository } from '@modules/notifications/repositories/InMemory/InMemoryNotificationsRepository'
 
 let createAppointment: CreateAppointmentService
 let inMemoryAppointmentRepository: InMemoryAppointmentsRepository
+let notificationsRepository: InMemoryNotificationsRepository
 
 describe('CreateAppointment', () => {
   beforeEach(() => {
     inMemoryAppointmentRepository = new InMemoryAppointmentsRepository()
+    notificationsRepository = new InMemoryNotificationsRepository()
     createAppointment = new CreateAppointmentService(
-      inMemoryAppointmentRepository
+      inMemoryAppointmentRepository,
+      notificationsRepository
     )
   })
 
