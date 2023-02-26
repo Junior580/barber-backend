@@ -5,4 +5,10 @@ interface IMailConfig {
 
 export default {
   driver: process.env.MAIL_DRIVER || 'ethereal',
+  defaults: {
+    from: {
+      email: 'email@teste.com',
+      name: 'Email de Teste',
+    },
+  },
 } as IMailConfig

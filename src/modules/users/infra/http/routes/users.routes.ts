@@ -10,7 +10,7 @@ import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 import multer from 'multer'
 import uploadConfig from '@config/upload'
 
-const upload = multer(uploadConfig)
+const upload = multer(uploadConfig.multer)
 
 export const usersRoutes = Router()
 

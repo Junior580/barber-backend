@@ -5,10 +5,12 @@ import mailConfig from '@config/mail'
 import { SendForgotPasswordEmailService } from '@modules/users/services/SendForgotPasswordEmailService'
 import { UsersRepository } from '../../typeorm/repositories/UsersRepository'
 import { UserTokenRepository } from '../../typeorm/repositories/UserTokensRepository'
-import { EtherealMailProvider } from '@shared/container/providers/MailProvider/implementations/EtherealMailProvider'
-import { SESMailProvider } from '@shared/container/providers/MailProvider/implementations/SESMailProvider'
 
-import { HandlebarsMailTemplateProvider } from '@shared/container/providers/MailTemplateProvider/implementations/HandlebarsMailTemplateProvider'
+// import { EtherealMailProvider } from '@shared/container/providers/MailProvider/implementations/EtherealMailProvider'
+// import { SESMailProvider } from '@shared/container/providers/MailProvider/implementations/SESMailProvider'
+// import { HandlebarsMailTemplateProvider } from '@shared/container/providers/MailTemplateProvider/implementations/HandlebarsMailTemplateProvider'
+
+import { emailProviders } from '@shared/container/providers/MailProvider'
 
 export class ForgotPasswordController {
   public async handle(request: Request, response: Response): Promise<Response> {
@@ -16,12 +18,7 @@ export class ForgotPasswordController {
 
     const userRepo = new UsersRepository()
 
-    const handleMailTemplate = new HandlebarsMailTemplateProvider()
-
-    const mailProvider =
-      mailConfig.driver === 'ethereal'
-        ? new EtherealMailProvider(handleMailTemplate)
-        : new SESMailProvider(handleMailTemplate)
+    const mailProvider = emailProviders[mailConfig.driver]
 
     const tokenRepo = new UserTokenRepository()
 

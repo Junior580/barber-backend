@@ -17,24 +17,36 @@ routes.use('/profile', profileRouter)
 
 // apagar
 import { Request, Response } from 'express'
-import { AppDataSourceMongo } from '../../typeorm/mongoData-source'
-import { Notification } from '@modules/notifications/infra/typeorm/schemas/Notification'
-import { MongoRepository } from 'typeorm'
+import { UpdateUserAvatarService } from '@modules/users/services/UpdateUserAvatarService'
+import { UsersRepository } from '@modules/users/infra/typeorm/repositories/UsersRepository'
+import uploadConfig from '@config/upload'
+import { ensureAuthenticated } from '@modules/users/infra/http/middlewares/ensureAuthenticated'
+import multer from 'multer'
+import { uploadImgProviders } from '@shared/container/providers/StorageProvider'
 
-const mongoRepo = AppDataSourceMongo.getMongoRepository(Notification)
+const upload = multer(uploadConfig.multer)
 
-routes.post('/teste', async (req: Request, res: Response) => {
-  try {
-    const notification = new Notification()
-    notification.content = `Novo agendamento para dia `
-    notification.recipient_id = 'bumbum'
-    console.log(notification)
+routes.patch(
+  '/teste',
+  ensureAuthenticated,
+  upload.single('avatar'),
 
-    await AppDataSourceMongo.manager.save(notification)
-    console.log(notification)
-    return res.json(notification)
-  } catch (error) {
-    console.log(error)
-    return res.json(error).status(400)
+  async (req: Request, res: Response) => {
+    try {
+      const userRepo = new UsersRepository()
+
+      const avatarRepo = uploadImgProviders[uploadConfig.driver]
+
+      const updateUserAvatar = new UpdateUserAvatarService(userRepo, avatarRepo)
+
+      const user = await updateUserAvatar.execute({
+        user_id: req.user.id,
+        avatarFilename: req.file?.filename,
+      })
+
+      return res.status(201).json(user)
+    } catch (error) {
+      return res.json(error).status(400)
+    }
   }
-})
+)
