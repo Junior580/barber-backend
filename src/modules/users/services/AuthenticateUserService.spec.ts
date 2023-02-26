@@ -1,21 +1,26 @@
+import AppError from '../../../shared/errors/AppError'
 import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUserRepository'
 import { CreateUserService } from '../services/CreateUserService'
 import { AuthenticateUserService } from './AuthenticateUserService'
 import { InMemoryHashProvider } from '../providers/HashProvider/inMemory/InMemoryHashProvider'
-import AppError from '../../../shared/errors/AppError'
+import { InMemoryCacheProvider } from '@shared/container/providers/CacheProvider/inMemory/InMemoryCacheProvider'
 
 let fakeUsersRepository: InMemoryUserRepository
 let createUser: CreateUserService
 let authenticateUser: AuthenticateUserService
 let inMemoryHashProvider: InMemoryHashProvider
+let memoryCacheProvider: InMemoryCacheProvider
 
 describe('Create User', () => {
   beforeEach(() => {
     fakeUsersRepository = new InMemoryUserRepository()
     inMemoryHashProvider = new InMemoryHashProvider()
+    memoryCacheProvider = new InMemoryCacheProvider()
+
     createUser = new CreateUserService(
       fakeUsersRepository,
-      inMemoryHashProvider
+      inMemoryHashProvider,
+      memoryCacheProvider
     )
     authenticateUser = new AuthenticateUserService(
       fakeUsersRepository,

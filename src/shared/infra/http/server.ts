@@ -2,12 +2,14 @@ import 'express-async-errors'
 import 'reflect-metadata'
 import express from 'express'
 
+import uploadConfig from '@config/upload'
+
 import { errors } from 'celebrate'
 import { AppDataSource } from '../typeorm/data-source'
 import { AppDataSourceMongo } from '../typeorm/mongoData-source'
 import { routes } from '../http/routes/index.routes'
-import { handleError } from '../http/middlewares/HandleError'
-import uploadConfig from '@config/upload'
+import { handleError } from './middlewares/handleError'
+import { rateLimiter } from './middlewares/rateLimiter'
 
 AppDataSource.initialize()
   .then(() => {
@@ -18,8 +20,8 @@ AppDataSource.initialize()
   .then(() => {
     const app = express()
 
+    app.use(rateLimiter)
     app.use(express.json())
-
     app.use('/files', express.static(uploadConfig.uploadsFolder))
 
     app.use(routes)
