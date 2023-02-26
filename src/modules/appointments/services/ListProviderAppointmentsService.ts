@@ -1,6 +1,7 @@
 import AppError from '@shared/errors/AppError'
 import { Appointment } from '../infra/typeorm/entities/Appointment'
 import { IAppointmentsRepository } from '../repositories/interfaces/IAppointmentsRepository'
+import { ICacheProvider } from '@shared/container/providers/CacheProvider/models/ICacheProvider'
 
 interface IRequest {
   provider_id: string
@@ -11,7 +12,8 @@ interface IRequest {
 
 export class ListProviderAppointmentsService {
   constructor(
-    private readonly appointmentsRepository: IAppointmentsRepository
+    private readonly appointmentsRepository: IAppointmentsRepository,
+    private readonly cacheProvider: ICacheProvider
   ) {}
 
   public async execute({

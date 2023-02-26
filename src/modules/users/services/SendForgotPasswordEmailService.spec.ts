@@ -1,9 +1,9 @@
 import AppError from '../../../shared/errors/AppError'
 
 import { InMemoryMailProvider } from '@shared/container/providers/MailProvider/inMemory/InMemoryMailProvider'
-import { InMemoryUserRepository } from '../repositories/InMemory/InMemoryUserRepository'
+import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUserRepository'
 import { SendForgotPasswordEmailService } from './SendForgotPasswordEmailService'
-import { InMemoryUserTokensRepository } from '../repositories/InMemory/InMemoryUserTokensRepository'
+import { InMemoryUserTokensRepository } from '../repositories/inMemory/InMemoryUserTokensRepository'
 
 let inMemoryUserRepository: InMemoryUserRepository
 let inMemoryMailProvider: InMemoryMailProvider

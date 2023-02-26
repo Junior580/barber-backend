@@ -1,4 +1,4 @@
-import { InMemoryUserRepository } from '../repositories/InMemory/InMemoryUserRepository'
+import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUserRepository'
 import { CreateUserService } from '../services/CreateUserService'
 import { InMemoryHashProvider } from '../providers/HashProvider/inMemory/InMemoryHashProvider'
 

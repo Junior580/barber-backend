@@ -1,4 +1,4 @@
-import { InMemoryAppointmentsRepository } from '../repositories/InMemory/inMemoryAppointmentsRepository'
+import { InMemoryAppointmentsRepository } from '../repositories/inMemory/inMemoryAppointmentsRepository'
 import { ListProviderAppointmentsService } from './ListProviderAppointmentsService'
 
 let inMemoryAppointmentsRepository: InMemoryAppointmentsRepository

@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError'
-import { InMemoryAppointmentsRepository } from '../repositories/InMemory/inMemoryAppointmentsRepository'
+import { InMemoryAppointmentsRepository } from '../repositories/inMemory/inMemoryAppointmentsRepository'
 import { CreateAppointmentService } from './CreateAppointmentService'
-import { InMemoryNotificationsRepository } from '@modules/notifications/repositories/InMemory/InMemoryNotificationsRepository'
+import { InMemoryNotificationsRepository } from '@modules/notifications/repositories/inMemory/InMemoryNotificationsRepository'
 
 let createAppointment: CreateAppointmentService
 let inMemoryAppointmentRepository: InMemoryAppointmentsRepository

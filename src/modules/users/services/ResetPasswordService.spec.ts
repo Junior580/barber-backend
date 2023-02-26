@@ -1,7 +1,7 @@
 // import AppError from '../../../shared/errors/AppError'
 
-import { InMemoryUserRepository } from '../repositories/InMemory/InMemoryUserRepository'
-import { InMemoryUserTokensRepository } from '../repositories/InMemory/InMemoryUserTokensRepository'
+import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUserRepository'
+import { InMemoryUserTokensRepository } from '../repositories/inMemory/InMemoryUserTokensRepository'
 import { ResetPasswordService } from './ResetPasswordService'
 import { InMemoryHashProvider } from '../providers/HashProvider/inMemory/InMemoryHashProvider'
 import AppError from '@shared/errors/AppError'

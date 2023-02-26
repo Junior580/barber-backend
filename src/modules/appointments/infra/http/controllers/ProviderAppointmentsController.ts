@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 
 import { ListProviderAppointmentsService } from '@modules/appointments/services/ListProviderAppointmentsService'
 import { AppointmentsRepository } from '../../typeorm/repositories/AppointmentsRepository'
+import { RedisCacheProvider } from '@shared/container/providers/CacheProvider/implementations/RedisCacheProvider'
 
 export class ProviderAppointmentsController {
   public async handle(request: Request, response: Response): Promise<Response> {
@@ -11,8 +12,11 @@ export class ProviderAppointmentsController {
 
     const appointmentRepo = new AppointmentsRepository()
 
+    const cacheProvider = new RedisCacheProvider()
+
     const listAppointmentService = new ListProviderAppointmentsService(
-      appointmentRepo
+      appointmentRepo,
+      cacheProvider
     )
 
     const appointments = await listAppointmentService.execute({

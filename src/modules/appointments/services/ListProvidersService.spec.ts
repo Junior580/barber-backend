@@ -1,4 +1,4 @@
-import { InMemoryUserRepository } from '@modules/users/repositories/InMemory/InMemoryUserRepository'
+import { InMemoryUserRepository } from '@modules/users/repositories/inMemory/InMemoryUserRepository'
 import { ListProvidersService } from './ListProvidersService'
 
 let inMemoryUsersRepository: InMemoryUserRepository

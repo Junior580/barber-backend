@@ -1,6 +1,6 @@
 // import AppError from '../../../shared/errors/AppError'
 
-import { InMemoryAppointmentsRepository } from '../repositories/InMemory/inMemoryAppointmentsRepository'
+import { InMemoryAppointmentsRepository } from '../repositories/inMemory/inMemoryAppointmentsRepository'
 import { ListProviderDayAvailabilityService } from './ListProviderDayAvailabilityService'
 
 let inMemoryAppointmentsRepository: InMemoryAppointmentsRepository
