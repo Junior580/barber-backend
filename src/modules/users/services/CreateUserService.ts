@@ -1,7 +1,8 @@
+import AppError from '@shared/errors/AppError'
 import { User } from '../infra/typeorm/entities/Users'
 import { IUsersRepository } from '../repositories/interfaces/IUserRepository'
-import AppError from '@shared/errors/AppError'
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'
+import { ICacheProvider } from '@shared/container/providers/CacheProvider/models/ICacheProvider'
 
 interface ICreateUserRequest {
   name: string
@@ -14,7 +15,8 @@ type ICreateUserResponse = User
 export class CreateUserService {
   constructor(
     private readonly usersRepository: IUsersRepository,
-    private hashProvider: IHashProvider
+    private hashProvider: IHashProvider,
+    private cacheProvider: ICacheProvider
   ) {}
 
   public async execute({
@@ -35,6 +37,8 @@ export class CreateUserService {
       name,
       password: hashedPass,
     })
+
+    await this.cacheProvider.invalidatePrefix('providers-list')
 
     return user
   }

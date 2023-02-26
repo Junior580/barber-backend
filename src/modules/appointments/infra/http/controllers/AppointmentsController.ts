@@ -4,6 +4,7 @@ import { CreateAppointmentService } from '@modules/appointments/services/CreateA
 import { AppointmentsRepository } from '../../typeorm/repositories/AppointmentsRepository'
 import { parseISO } from 'date-fns'
 import { NotificationsRepository } from '@modules/notifications/infra/typeorm/repositories/NotificationsRepository'
+import { RedisCacheProvider } from '@shared/container/providers/CacheProvider/implementations/RedisCacheProvider'
 
 export class AppointmentController {
   public async handle(request: Request, response: Response): Promise<Response> {
@@ -11,21 +12,23 @@ export class AppointmentController {
 
     const { provider_id, date } = request.body
     //exemplo de formato recebido pelo insomina: "date": "2023-03-21 13:00:00"
-    const parsedDate = parseISO(date)
 
     const appointmentRepo = new AppointmentsRepository()
 
     const mongoRepo = new NotificationsRepository()
 
+    const cacheProvider = new RedisCacheProvider()
+
     const createAppointment = new CreateAppointmentService(
       appointmentRepo,
-      mongoRepo
+      mongoRepo,
+      cacheProvider
     )
 
     const appointment = await createAppointment.execute({
       provider_id,
       user_id,
-      date: parsedDate,
+      date,
     })
 
     return response.json(appointment)

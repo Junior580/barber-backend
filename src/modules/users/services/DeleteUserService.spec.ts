@@ -2,6 +2,7 @@ import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUserRep
 import { CreateUserService } from '../services/CreateUserService'
 import { DeleteUserService } from '../services/DeleteUserService'
 import { InMemoryHashProvider } from '../providers/HashProvider/inMemory/InMemoryHashProvider'
+import { InMemoryCacheProvider } from '@shared/container/providers/CacheProvider/inMemory/InMemoryCacheProvider'
 
 import AppError from '../../../shared/errors/AppError'
 
@@ -9,15 +10,18 @@ let fakeUsersRepository: InMemoryUserRepository
 let deleteUser: DeleteUserService
 let createUser: CreateUserService
 let inMemoryHashProvider: InMemoryHashProvider
+let memoryCacheProvider: InMemoryCacheProvider
 
 describe('delete users', () => {
   beforeEach(async () => {
     fakeUsersRepository = new InMemoryUserRepository()
     inMemoryHashProvider = new InMemoryHashProvider()
+    memoryCacheProvider = new InMemoryCacheProvider()
 
     createUser = new CreateUserService(
       fakeUsersRepository,
-      inMemoryHashProvider
+      inMemoryHashProvider,
+      memoryCacheProvider
     )
     deleteUser = new DeleteUserService(fakeUsersRepository)
   })

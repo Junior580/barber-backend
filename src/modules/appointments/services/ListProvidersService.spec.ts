@@ -1,13 +1,19 @@
 import { InMemoryUserRepository } from '@modules/users/repositories/inMemory/InMemoryUserRepository'
 import { ListProvidersService } from './ListProvidersService'
+import { InMemoryCacheProvider } from '@shared/container/providers/CacheProvider/inMemory/InMemoryCacheProvider'
 
 let inMemoryUsersRepository: InMemoryUserRepository
 let listProviders: ListProvidersService
+let memoryCacheProvider: InMemoryCacheProvider
 
 describe('List Providers', () => {
   beforeEach(async () => {
     inMemoryUsersRepository = new InMemoryUserRepository()
-    listProviders = new ListProvidersService(inMemoryUsersRepository)
+    memoryCacheProvider = new InMemoryCacheProvider()
+    listProviders = new ListProvidersService(
+      inMemoryUsersRepository,
+      memoryCacheProvider
+    )
   })
 
   it('should be able to list the providers', async () => {

@@ -1,8 +1,9 @@
+import AppError from '@shared/errors/AppError'
 import { startOfHour, isBefore, getHours, format } from 'date-fns'
 import { Appointment } from '../infra/typeorm/entities/Appointment'
-import AppError from '@shared/errors/AppError'
 import { INotificationsRepository } from '@modules/notifications/repositories/interface/INotificationsRepository'
 import { IAppointmentsRepository } from '../repositories/interfaces/IAppointmentsRepository'
+import { ICacheProvider } from '@shared/container/providers/CacheProvider/models/ICacheProvider'
 
 interface IRequestAppointment {
   provider_id: string
@@ -12,8 +13,9 @@ interface IRequestAppointment {
 
 export class CreateAppointmentService {
   constructor(
-    private readonly appointmentsRepository: IAppointmentsRepository,
-    private readonly notificationsRepository: INotificationsRepository
+    private appointmentsRepository: IAppointmentsRepository,
+    private notificationsRepository: INotificationsRepository,
+    private cacheProvider: ICacheProvider
   ) {}
 
   public async execute({
@@ -57,12 +59,12 @@ export class CreateAppointmentService {
       content: `Novo agendamento para dia ${dateFormatted}`,
     })
 
-    // await this.cacheProvider.invalidate(
-    //   `provider-appointments:${provider_id}:${format(
-    //     appointmentDate,
-    //     'yyyy-M-d'
-    //   )}`
-    // )
+    await this.cacheProvider.invalidate(
+      `provider-appointments:${provider_id}:${format(
+        appointmentDate,
+        'yyyy-M-d'
+      )}`
+    )
 
     return appointment
   }

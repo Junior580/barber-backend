@@ -1,7 +1,8 @@
+import AppError from '@shared/errors/AppError'
 import { User } from '@modules/users/infra/typeorm/entities/Users'
 import { IUsersRepository } from '@modules/users/repositories/interfaces/IUserRepository'
 import { ICacheProvider } from '@shared/container/providers/CacheProvider/models/ICacheProvider'
-import AppError from '@shared/errors/AppError'
+import { instanceToInstance } from 'class-transformer'
 
 interface IListProvidersRequest {
   user_id: string
@@ -11,8 +12,8 @@ type IListProvidersResponse = User[]
 
 export class ListProvidersService {
   constructor(
-    private readonly usersRepository: IUsersRepository,
-    private readonly cacheProvider: ICacheProvider
+    private usersRepository: IUsersRepository,
+    private cacheProvider: ICacheProvider
   ) {}
 
   public async execute({
@@ -26,8 +27,11 @@ export class ListProvidersService {
       users = await this.usersRepository.findAllProviders({
         expect_user_id: user_id,
       })
-
-      await this.cacheProvider.save(`providers-list: ${user_id}`, users)
+      console.log('query no banco')
+      await this.cacheProvider.save(
+        `providers-list: ${user_id}`,
+        instanceToInstance(users)
+      )
     }
 
     if (!users) {

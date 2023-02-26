@@ -1,14 +1,18 @@
 import { InMemoryAppointmentsRepository } from '../repositories/inMemory/inMemoryAppointmentsRepository'
 import { ListProviderAppointmentsService } from './ListProviderAppointmentsService'
+import { InMemoryCacheProvider } from '@shared/container/providers/CacheProvider/inMemory/InMemoryCacheProvider'
 
 let inMemoryAppointmentsRepository: InMemoryAppointmentsRepository
 let listProviderAppointments: ListProviderAppointmentsService
+let memoryCacheProvider: InMemoryCacheProvider
 
 describe('ListProviderAppointments', () => {
   beforeEach(() => {
     inMemoryAppointmentsRepository = new InMemoryAppointmentsRepository()
+    memoryCacheProvider = new InMemoryCacheProvider()
     listProviderAppointments = new ListProviderAppointmentsService(
-      inMemoryAppointmentsRepository
+      inMemoryAppointmentsRepository,
+      memoryCacheProvider
     )
   })
 
