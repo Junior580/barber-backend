@@ -8,11 +8,11 @@ export function handleError(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction
 ) {
-  if (error instanceof AppError) {
+  if (error instanceof AppError)
     return res
       .status(error.statusCode)
       .send({ status: 'error', message: error.message })
-  }
+
   return res
     .status(500)
     .send({ status: 'error', message: 'Internal server error', error })
