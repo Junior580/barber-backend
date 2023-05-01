@@ -6,6 +6,7 @@
 
 - NodeJS
 - Typescript
+- TypeORM
 - Express
 - Docker
 - PostgreSQL
