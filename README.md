@@ -1,3 +1,7 @@
+# Barbearia back end
+
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/Junior580/barber-backend/blob/main/LICENCE)
+
 # Macro funcionalidades
 
 **Micro Funcionalidades**
