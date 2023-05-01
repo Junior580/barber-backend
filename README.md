@@ -2,6 +2,16 @@
 
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/Junior580/barber-backend/blob/main/LICENCE)
 
+# Tecnologias usadas no projeto
+
+NodeJS
+Typescript
+Express
+Docker
+PostgreSQL
+MongoDB
+Redis
+
 # Macro funcionalidades
 
 **Micro Funcionalidades**
