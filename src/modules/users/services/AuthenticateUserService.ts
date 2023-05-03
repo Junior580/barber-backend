@@ -44,7 +44,7 @@ export class AuthenticateUserService {
     //   expiresIn,
     // })
     //teste
-    const token = sign('teste', secret, {
+    const token = sign('teste', '3c130ea5d8d2d3daca7f6808cdf0f148', {
       subject: user.id,
       expiresIn,
     })
