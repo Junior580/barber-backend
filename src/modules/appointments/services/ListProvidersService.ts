@@ -27,7 +27,7 @@ export class ListProvidersService {
       users = await this.usersRepository.findAllProviders({
         expect_user_id: user_id,
       })
-      console.log('query no banco')
+
       await this.cacheProvider.save(
         `providers-list: ${user_id}`,
         instanceToInstance(users)

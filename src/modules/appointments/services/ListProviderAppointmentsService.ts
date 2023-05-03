@@ -37,7 +37,7 @@ export class ListProviderAppointmentsService {
           year,
         }
       )
-      console.log('banco de dados')
+
       await this.cacheProvider.save(cacheKey, instanceToInstance(appointments))
     }
 
