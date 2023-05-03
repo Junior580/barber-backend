@@ -4,8 +4,6 @@ import { IUsersRepository } from '@modules/users/repositories/interfaces/IUserRe
 import AppError from '@shared/errors/AppError'
 import { jwt } from '@config/auth'
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'
-//apagar
-import 'dotenv/config'
 
 interface IRequest {
   email: string
@@ -41,7 +39,7 @@ export class AuthenticateUserService {
 
     const { secret, expiresIn } = jwt
 
-    const token = sign({}, secret, {
+    const token = sign({ foo: 'bar' }, secret, {
       subject: user.id,
       expiresIn,
     })
