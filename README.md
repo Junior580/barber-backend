@@ -12,6 +12,7 @@
 - PostgreSQL
 - MongoDB
 - Redis
+- JWT Auth
 
 # Macro funcionalidades
 

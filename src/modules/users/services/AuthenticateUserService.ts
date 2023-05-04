@@ -39,12 +39,7 @@ export class AuthenticateUserService {
 
     const { secret, expiresIn } = jwt
 
-    // const token = sign({}, secret, {
-    //   subject: user.id,
-    //   expiresIn,
-    // })
-    //teste
-    const token = sign('teste', '3c130ea5d8d2d3daca7f6808cdf0f148', {
+    const token = sign({}, secret, {
       subject: user.id,
       expiresIn,
     })
