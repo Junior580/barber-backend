@@ -3,6 +3,7 @@ import 'reflect-metadata'
 import express from 'express'
 
 import uploadConfig from '@config/upload'
+import cors from 'cors'
 
 import { errors } from 'celebrate'
 import { AppDataSource } from '../typeorm/data-source'
@@ -20,8 +21,10 @@ AppDataSource.initialize()
   .then(() => {
     const app = express()
 
-    app.use(rateLimiter)
+    app.use(cors())
+
     app.use(express.json())
+    app.use(rateLimiter)
     app.use('/files', express.static(uploadConfig.uploadsFolder))
 
     app.use(routes)
