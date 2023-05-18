@@ -1,6 +1,10 @@
 # Barbearia back end
 
+**Licence**
+
 [![NPM](https://img.shields.io/npm/l/express?style=for-the-badge)](https://github.com/Junior580/barber-backend/blob/main/LICENCE)
+
+**Workflow Status**
 
 [![NPM](https://img.shields.io/github/actions/workflow/status/junior580/barber-backend/coverage.yml?style=for-the-badge)](https://github.com/Junior580/barber-backend/actions)
 
