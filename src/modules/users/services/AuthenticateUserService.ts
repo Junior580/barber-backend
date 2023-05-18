@@ -4,7 +4,8 @@ import { IUsersRepository } from '@modules/users/repositories/interfaces/IUserRe
 import AppError from '@shared/errors/AppError'
 import { jwt } from '@config/auth'
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'
-import 'dotenv/config'
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 interface IRequest {
   email: string
