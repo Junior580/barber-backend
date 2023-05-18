@@ -1,6 +1,6 @@
 # Barbearia back end
 
-[![NPM](https://img.shields.io/npm/l/react)](https://github.com/Junior580/barber-backend/blob/main/LICENCE)
+[![NPM](https://img.shields.io/npm/l/react?style=plastic)](https://github.com/Junior580/barber-backend/blob/main/LICENCE)
 
 [![NPM](https://img.shields.io/github/actions/workflow/status/junior580/barber-backend/coverage.yml)](https://github.com/Junior580/barber-backend/actions)
 
