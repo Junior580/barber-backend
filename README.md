@@ -2,6 +2,8 @@
 
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/Junior580/barber-backend/blob/main/LICENCE)
 
+https://img.shields.io/github/actions/workflow/status/junior580/barber-backend/coverage.yml
+
 # Tecnologias usadas no projeto
 
 - NodeJS
