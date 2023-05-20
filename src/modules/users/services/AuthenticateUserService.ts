@@ -39,7 +39,7 @@ export class AuthenticateUserService {
 
     const { secret, expiresIn } = jwt
 
-    const token = sign({}, `${process.env.JWT_PASS}`, {
+    const token = sign({}, secret, {
       subject: user.id,
       expiresIn,
     })
