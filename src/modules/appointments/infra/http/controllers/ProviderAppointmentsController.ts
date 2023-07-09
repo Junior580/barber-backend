@@ -3,6 +3,7 @@ import { Request, Response } from 'express'
 import { ListProviderAppointmentsService } from '@modules/appointments/services/ListProviderAppointmentsService'
 import { AppointmentsRepository } from '../../typeorm/repositories/AppointmentsRepository'
 import { RedisCacheProvider } from '@shared/container/providers/CacheProvider/implementations/RedisCacheProvider'
+import { instanceToInstance } from 'class-transformer'
 
 export class ProviderAppointmentsController {
   public async handle(request: Request, response: Response): Promise<Response> {
@@ -26,6 +27,6 @@ export class ProviderAppointmentsController {
       year: Number(year),
     })
 
-    return response.json(appointments)
+    return response.json(instanceToInstance(appointments))
   }
 }
