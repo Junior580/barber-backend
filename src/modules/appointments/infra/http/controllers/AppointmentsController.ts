@@ -2,7 +2,6 @@ import { Request, Response } from 'express'
 
 import { CreateAppointmentService } from '@modules/appointments/services/CreateAppointmentService'
 import { AppointmentsRepository } from '../../typeorm/repositories/AppointmentsRepository'
-import { parseISO } from 'date-fns'
 import { NotificationsRepository } from '@modules/notifications/infra/typeorm/repositories/NotificationsRepository'
 import { RedisCacheProvider } from '@shared/container/providers/CacheProvider/implementations/RedisCacheProvider'
 

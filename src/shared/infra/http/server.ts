@@ -1,3 +1,5 @@
+import 'dotenv/config'
+
 import 'express-async-errors'
 import 'reflect-metadata'
 import express from 'express'
@@ -27,14 +29,16 @@ AppDataSource.initialize()
     app.use(rateLimiter)
     app.use('/files', express.static(uploadConfig.uploadsFolder))
 
-    app.use(routes)
+    app.use('/api', routes)
 
     app.use(errors())
 
     app.use(handleError)
 
-    return app.listen(3000, () => {
-      console.log('🚀 server is running!')
+    const port = 3333
+
+    return app.listen(port, () => {
+      console.log(`🚀 server is running on ${port}!`)
     })
   })
   .catch(err => {

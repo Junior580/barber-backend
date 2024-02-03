@@ -17,7 +17,7 @@ appointmentsRouter.post(
   celebrate({
     [Segments.BODY]: {
       provider_id: Joi.string().uuid().required(),
-      //ajustar para formato de data
+
       date: Joi.date().required(),
     },
   }),
