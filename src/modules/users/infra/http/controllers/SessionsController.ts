@@ -20,6 +20,11 @@ export default class SessionsController {
       password,
     })
 
+    // response.cookie('token', token, {
+    //   httpOnly: true,
+    // })
+
     return response.json({ user: instanceToInstance(user), token })
+    // return response.json({ user: instanceToInstance(user) })
   }
 }
