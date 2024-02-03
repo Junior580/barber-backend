@@ -5,7 +5,7 @@ import { AppointmentsRepository } from '../../typeorm/repositories/AppointmentsR
 export class ProviderMonthAvailabilityController {
   public async handle(request: Request, response: Response): Promise<Response> {
     const { provider_id } = request.params
-    const { month, year } = request.body
+    const { month, year } = request.query
 
     const appointmentRepo = new AppointmentsRepository()
 
