@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc && tsc-alias",
+    "start": "node dist/src/shared/infra/http/server",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/shared/infra/typeorm/data-source.ts migration:generate ./src/shared/infra/typeorm/migrations/default",

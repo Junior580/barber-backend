@@ -2,31 +2,54 @@ version: '3'
 
 services:
   node:
-    image: node:14-alpine
-    working_dir: /app
+    container_name: barberapp1
+    build:
+      context: .
+    env_file:
+      - .env
+    environment:
+      - RUN_MIGRATIONS=true
+    depends_on:
+      - postgres
+      - mongodb
+      - redis
     volumes:
       - .:/app
     ports:
       - '3000:3000'
 
   postgres:
-    image: postgres:16.1-alpine
+    container_name: barberdb
+    image: postgres:16.3
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
-    ports:
-      - '5432:5432'
+    volumes:
+      - storage_app:/var/lib/postgresql/postgresdata
+    networks:
+      - backendnestjs
 
   mongodb:
     image: mongo:latest
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    ports:
-      - '27017:27017'
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: docker
+    volumes:
+      - storage_app:/var/lib/mongodb/mongodata
+    networks:
+      - backendnestjs
 
   redis:
     image: redis:6-alpine
-    ports:
-      - '6379:6379'
+    networks:
+      - backendnestjs
+
+
+networks:
+  backendnestjs:
+    driver: bridge
+
+volumes:
+  storage_app:
+    driver: local
